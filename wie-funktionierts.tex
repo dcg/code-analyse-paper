@@ -1,0 +1,31 @@
+FindBugs analyisiert Bytecode nach Pattern
+Wie funktioniert Bytecode -> Src-Zeile
+BCEL
+state class method, bytecode scanning
+------------------------------------------------------
+
+PMD arbeitet auf dem AST > einfacher, aber langsamer
+PMD unterstüzt auch XPATH
+------------------------------------------------------
+Checkstyle arbeitet ebenfalls auf dem AST
+
+
+To find unused public methods -- as it turns out I wrote a tool to do this last week at my work. I did not use Checkstyle at all as it is much easier to analyse the byte code using a library like ASM. This is also how FindBugs works, and I would recommend this approach when you need rich type information. 
+
+
+Checkstyle ist modular aufgebaut. Die Module können durch Konfiguration kombiniert werden. Einige 
+
+Module bieten Schnittstellen zur Erweiterung. Die Module bilden eine Hierarchie. Auf oberster Ebene 
+
+liegt das Modul Checker, das die zu prüfenden Dateien einliest. Auf der nächsten Ebene liegen Module 
+
+die das Interface FileSetCheck implementieren und die eingelesenen Dateien vom Checker übergeben 
+
+bekommen. Das Interface FileSetCheck definiert Methodensignaturen zum Entgegennehmen von Dateien 
+
+und Werfen von Fehlern. Zu diesen gehört der Treewalker. Die meisten Checks (Prüfungen von 
+
+Programmierrichtlinien) sind als Submodule des Treewalker implementiert
+
+
+
