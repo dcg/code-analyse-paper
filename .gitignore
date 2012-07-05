@@ -1,8 +1,8 @@
 
-statische_analyse.aux
+*.aux
 
-statische_analyse.log
+*.log
 
-statische_analyse.synctex.gz
+*.synctex.gz
 
-statische_analyse.pdf
+*.pdf
