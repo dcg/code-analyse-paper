@@ -6,3 +6,9 @@
 *.synctex.gz
 
 *.pdf
+
+statische_analyse.bbl
+
+statische_analyse.blg
+
+tool-auswahl.texshop

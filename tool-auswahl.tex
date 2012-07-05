@@ -1,17 +1,17 @@
 % !TEX encoding = UTF-8 Unicode 
 \section{Werkzeuge}
 
-An erster Stelle steht in der Programmierung hinsichtlich der statischen Code-Analyse zunächst das kritische Hinterfragen der Qualität des eigenen Quellcode bezüglich der technischen Korrektheit und der  Erfüllung der eigenen oder firmenweiten Vorgaben für guten Programmierstil. Diese Überprüfung ist gerade für erfahrene Programmierer Routine. Umfangreiche Nachschlagewerke geben Ratschläge zur Optimierung von Quellcode, zum Beispiel \cite{}.
+An erster Stelle steht in der Programmierung hinsichtlich der statischen Code-Analyse zunächst das kritische Hinterfragen der Qualität des eigenen Quellcode bezüglich der technischen Korrektheit und der  Erfüllung der eigenen oder firmenweiten Vorgaben für guten Programmierstil. Diese Überprüfung ist gerade für erfahrene Programmierer Routine. Umfangreiche Nachschlagewerke geben Ratschläge zur Optimierung von Quellcode, zum Beispiel \cite{mcconnell2004}.
 
 Die Überprüfung muss nicht immer durch den Programmierer selbst erfolgen, sondern kann auch in Form von Code Reviews mit unterschiedlichem Grad an Formalisierung organisiert sein. 
 
-Eine zweite Stufe der statischen Code-Analyse stellt bei kompilierten Sprachen zunächst der Compiler dar, der auch ohne den Einsatz von zusätzlichen Analysewerkzeugen Hinweise auf schlechten Programmierstil oder mögliche Laufzeitprobleme gibt. Beispielsweise weistder Java-Compiler den Programmierer auf nicht erreichbaren Code hin -- also Code der in einem Block mit nicht erfüllbarer Vorbedingung steht.
+Komplexere Entwicklungsumgebungen liefern zum Teil Analysetools standardmäßig mit. Eclipse ist ein Beispiel hierfür.
+
+Eine weitere, ebenfalls noch sehr einfache Stufe der statischen Code-Analyse stellt bei kompilierten Sprachen zunächst der Compiler dar, der auch ohne den Einsatz von zusätzlichen Analysewerkzeugen Hinweise auf schlechten Programmierstil oder mögliche Laufzeitprobleme gibt. Beispielsweise weist der Java-Compiler den Programmierer auf nicht erreichbaren Code hin -- also Code der in einem Block mit nicht erfüllbarer Vorbedingung steht.
 
 
-Als Werkzeuge zur Statischen Code-Analyse sind in der Vorlesung FindBugs und CheckStyle besprochen worden, die beide im Java-Bereich eingesetzt werden. Es existieren weitere Tools die für andere Sprachen, Entwicklungsumgebungen oder nur bestimmte Plattformen entwickelt sind. Dazu zählen 	StyleCop, fxCop und Jetbrains ReSharper für alle bzw. einige der .NET-Sprachen. Eines der ersten Werkzeuge für die statische Analyse war Lint bzw. Splint für die Sprache C. Hinzu kommt Software, die  Code Coverage Analysen im Zusammenspiel mit Komponententest-Frameworks erstellt; hierzu zählen u.a. Emma für Java und Jetbrains dotCover für die .NET-Sprachen.
+Als Werkzeuge zur Statischen Code-Analyse sind in der Vorlesung in erster Linie FindBugs und CheckStyle besprochen worden, die beide im Java-Bereich eingesetzt werden. Es existiert eine Vielzahl weiterer Tools\footnote{\url{http://bit.ly/M2z6Ui}} die für andere Sprachen, Entwicklungsumgebungen oder nur bestimmte Plattformen entwickelt sind. Dazu zählen StyleCop, fxCop und Jetbrains ReSharper für alle bzw. einige der .NET-Sprachen. Eines der ersten Werkzeuge für die statische Analyse war Lint bzw. Splint für die Sprache C. Hinzu kommt Software, die  Code Coverage Analysen im Zusammenspiel mit Komponententest-Frameworks erstellt; hierzu zählen u.a. Emma für Java und Jetbrains dotCover für die .NET-Sprachen.
 
-Teilweise decken die Werkzeuge in ihrem Leistungsspektrum ähnliche oder gleiche Anforderungen ab wie ihre Konkurrenten.
-
-Die Mehrzahl der genannten Werkzeuge fügt sich in die Entwicklungsumgebung als Plugin ein und kann in seinen Analysen durch Konfigurationen individualisiert werden.
+Teilweise decken die Werkzeuge in ihrem Leistungsspektrum ähnliche oder gleiche Anforderungen ab wie ihre Konkurrenten. Die Mehrzahl der genannten Werkzeuge fügt sich in die Entwicklungsumgebung als Plugin ein und kann in seinen Analysen durch Konfigurationen individualisiert werden.
 
 Je nach Projektvorgaben ist es bei einigen der Softwaretools möglich, das Bereitstellen von Quellcode in die gemeinsam genutzte Versionsverwaltung zu verweigern, wenn der Code nicht den im Vorfeld definierten Mindestanforderungen genügt, die im Zuge der statischen Analyse vom Werkzeug geprüft werden. Die Vorlesung hat aufgezeigt, dass dieser Ansatz in der Praxis kritisch hinterfragt werden muss, um nicht das Gefühl von Überwachung und Gängelung aufkommen zu lassen.
