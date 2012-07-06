@@ -20,8 +20,8 @@
 % MODIFICATION: GERMAN
 %   Patrick Permien, Faculty of Digital Media, Furtwangen University
 %   e-mail: Patrick.Permien@hs-furtwangen.de
-%   \harvardandO: Search for 'und' in this file and replace them all with '\harvardand'
-%   \harvardandO: Search for 'edn' in this file and replace them all with 'edn'
+%   undO: Search for 'und' in this file and replace them all with 'und'
+%   undO: Search for 'edn' in this file and replace them all with 'edn'
 
 ENTRY
   { address
@@ -191,7 +191,7 @@ FUNCTION {format.names}
 	    { ", " * t * }
 	    { t "others" =
 		{ " et~al." * }
-		{ " \harvardand\ " * t * }
+		{ " und\ " * t * }
 	      if$
 	    }
 	  if$
@@ -294,7 +294,7 @@ FUNCTION {format.bvolume}
 	'skip$
 	{ " of " * series emphasize * }
       if$
-      "volume \harvardand number" number either.or.check
+      "volume und number" number either.or.check
     }
   if$
 }
@@ -323,8 +323,8 @@ FUNCTION {format.edition}
 { edition empty$
     { "" }
     { output.state mid.sentence =
-	{ edition "l" change.case$ " edn" * }
-	{ edition "t" change.case$ " edn" * }
+	{ edition "l" change.case$ "  Auflage" * }
+	{ edition "t" change.case$ "  Auflage" * }
       if$
     }
   if$
@@ -550,7 +550,7 @@ FUNCTION {format.lab.names.abbr}
 	{ s #1 "{vv~}{ll}" format.name$ " et~al." * }
 	{ s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { s #1 "{vv~}{ll}" format.name$ " et~al." * }
-	    { s #1 "{vv~}{ll}" format.name$ " \harvardand\ " *
+	    { s #1 "{vv~}{ll}" format.name$ " und\ " *
               s #2 "{vv~}{ll}" format.name$ * 
             }
           if$
@@ -573,7 +573,7 @@ FUNCTION {format.lab.names.full}
 	    { ", " * t * }
 	    { t "others" =
 		{ " et~al." * }
-		{ " \harvardand\ " * t * }
+		{ " und\ " * t * }
 	      if$
 	    }
 	  if$
@@ -729,9 +729,9 @@ FUNCTION {book}
   " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
   new.block
   author empty$
-    { editor "author \harvardand editor" item.check }
+    { editor "author und editor" item.check }
     { crossref missing$
-	{ "author \harvardand editor" editor either.or.check }
+	{ "author und editor" editor either.or.check }
 	'skip$
       if$
     }
@@ -780,9 +780,9 @@ FUNCTION {inbook}
   " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
   new.block
   author empty$
-    { editor "author \harvardand editor" item.check }
+    { editor "author und editor" item.check }
     { crossref missing$
-	{ "author \harvardand editor" editor either.or.check }
+	{ "author und editor" editor either.or.check }
 	'skip$
       if$
     }
@@ -802,7 +802,7 @@ FUNCTION {inbook}
       format.edition output
     }
   if$
-  format.chapter.pages "chapter \harvardand pages" output.check
+  format.chapter.pages "chapter und pages" output.check
   new.block
   note output
   fin.entry
@@ -910,7 +910,7 @@ FUNCTION {mastersthesis}
     { skip$ }
     { format.title emphasize "title" output.check }
   if$
-  "Master's thesis" format.thesis.type output.nonnull
+  "Hochschulschrift" format.thesis.type output.nonnull
   school "school" output.check
   address output
   new.block
@@ -1055,7 +1055,7 @@ MACRO {acta} {"Acta Informatica"}
 
 MACRO {cacm} {"Communications of the ACM"}
 
-MACRO {ibmjrd} {"IBM Journal of Research \harvardand Development"}
+MACRO {ibmjrd} {"IBM Journal of Research und Development"}
 
 MACRO {ibmsj} {"IBM Systems Journal"}
 
@@ -1070,7 +1070,7 @@ MACRO {ipl} {"Information Processing Letters"}
 
 MACRO {jacm} {"Journal of the ACM"}
 
-MACRO {jcss} {"Journal of Computer \harvardand System Sciences"}
+MACRO {jcss} {"Journal of Computer und System Sciences"}
 
 MACRO {scp} {"Science of Computer Programming"}
 
@@ -1086,7 +1086,7 @@ MACRO {toms} {"ACM Transactions on Mathematical Software"}
 
 MACRO {toois} {"ACM Transactions on Office Information Systems"}
 
-MACRO {toplas} {"ACM Transactions on Programming Languages \harvardand Systems"}
+MACRO {toplas} {"ACM Transactions on Programming Languages und Systems"}
 
 MACRO {tcs} {"Theoretical Computer Science"}
 
@@ -1100,7 +1100,7 @@ FUNCTION {sortify}
 }
 
 FUNCTION {sortify.names}
-{ " \harvardand\ " " " replace.substring
+{ " und\ " " " replace.substring
   " et~al." " zzz" replace.substring
   sortify
 }
