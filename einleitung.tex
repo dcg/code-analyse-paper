@@ -1,19 +1,17 @@
 \section{Einleitung / \"Uberblick}
-Einleitung
 Die statische Analyse, oder auch Source Code Analyse, ist ein statisches Software-Testverfahren. Sie ist ein erster und unverzichtbarer Schritt verschiedenster Software-Qualitäts-Kontrollen. Dabei wird ein Verständnis für die Code-Struktur hergestellt und trägt dazu bei, den Code entsprechenden Standards anzupassen.
 Die Analyse gestattet eine frühzeitige Erkennung und somit die Korrektur von Fehlern mit einem geringem Maß an Aufwand. Durch das frühe Eingreifen wird verhindert, dass scheinbar kleine Fehler sich manifestieren und Wochen, Monate oder Jahre später zu erheblichen Problemen führen. 
 Bei der statischen Analyse muss im Gegensatz zu dynamischen Testverfahren, die zu testende Software nicht ausgeführt werden. Da der Quelltext benötigt wird, lässt sich die statische Analyse dem White-Box-Testverfahren zuordnen.
-Die Analyse kann zwar vollständig manuell durchgeführt werden, dies ist aber mit erheblichem Aufwand verbunden. Daher werden automatisierte Tools eingesetzt. Das erste Tool dieser Art war „Lint“, welches seiner Zeit von den Bell Labs für die Programmiersprache C entwickelt wurde. Das heutzutage bekannteste Tool ist „FindBugs“, auf dessen Funktionsweise und Umfang später noch näher eingegangen wird. Im Vergleich zu den frühen automatisierten Hilfen, werden heute neben funktionalen Fehlern auch sogenannter „Code-Smell“ erkannt. Dies können beispielsweise Code-Duplizierungen oder „toter Code“ (nicht-verwendeter Code) sein. Dabei kommen Techniken wie die Taint Analyse oder die Datenfluss Analyse zum Einsatz.
+Die Analyse kann zwar vollständig manuell durchgeführt werden, dies ist aber mit erheblichem Aufwand verbunden. Daher werden automatisierte Tools eingesetzt. Das erste Tool dieser Art war "Lint", welches seiner Zeit von den Bell Labs für die Programmiersprache C entwickelt wurde. Das heutzutage bekannteste Tool ist "FindBugs", auf dessen Funktionsweise und Umfang später noch näher eingegangen wird. Im Vergleich zu den frühen automatisierten Hilfen, werden heute neben funktionalen Fehlern auch sogenannter "Code-Smell" erkannt. Dies können beispielsweise Code-Duplizierungen oder "toter Code" (nicht-verwendeter Code) sein. Dabei kommen Techniken wie die Taint Analyse oder die Datenfluss Analyse zum Einsatz.
 Das Ziel der statischen Analyse ist momentan nur das Aufzeigen von möglichen Fehlern, es wird keine automatische Korrektur des Codes vorgenommen. Idealerweise würden solche Tools mit einem hohen Maß an Zuverlässigkeit mutmaßliche Fehler und Sicherheitslücken automatisch erkennen und beheben. Dies ist jedoch noch nicht realisierbar. Momentan gibt es noch immer eine hohe Rate von Fehleinschätzungen. 
 Nichtsdestotrotz ist die statische Analyse in der heutigen Programmierung nicht mehr wegzudenken und dient als hervorragende Hilfestellung für Programmierer und Tester um vor allem sicherheitsrelevante Teile des Codes zu analysieren und Fehler effizient zu finden.
 Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumgebungen integrieren und können somit unmittelbar während der Entwicklung den Programmierer auf eventuelle Fehler hinweisen.
-
-Beispiele für Fehler die gefunden werden können
+\paragraph{Beispiele für erkennbare Fehler\footnote{vgl. \url{http://www.klocwork.com}, \\\url{http://www.hitex.com }}:}
 \begin{itemize}
 \item Syntaktische Fehler (z.B. Tippfehler, falsche Vergleiche, Klammersetzung)
 \item Stilfehler, Einhaltung von Coding-Standards (z.B. Whitespacing)
 \item Software Metriken 
-\item „Bad Smells“
+\item "Bad Smells"
 \item Leere Anweisungen (z.B. Exceptions)
 \item Speicherlecks
 \item Zerstörung von Speicherinhalten
@@ -31,52 +29,33 @@ Beispiele für Fehler die gefunden werden können
 \item 32/64-bit Kompatibilitätsprobleme
 \item Pufferüberläufe
 \item Nicht-validierte Benutzereingaben
-\item Mögliche Sicherheitsproblematiken (Injections, Cross-Site-Scripting)
+\item Mögliche Sicherheitsproblematiken (z.B. Injections, Cross-Site-Scripting)
 \item Veraltete Methoden
 \item Gelockte und nicht-gelockte Zugriffe auf dieselbe Variable per Threads
 \item Endlosschleifen
 \item Toter Code
 \item Unerreichbarer Code
 \end{itemize}
-http://www.klocwork.com / http://www.hitex.com 
-
-Stärken und Schwächen https://www.owasp.org/index.php/Static_Code_Analysis
+\paragraph{Stärken und Schwächen\footnote{vgl. \url{https://www.owasp.org/index.php/Static_Code_Analysis}}:} 
 Stärken
 \begin{itemize}
 \item Skaliert sehr gut
-\item Sehr Hilfreich sowohl bei einfachen Fehlern (Tippfehler) als auch bei komplexen Interaktionen (Pufferüberläufe, SQL Injections, …)
+\item Sehr Hilfreich sowohl bei einfachen Fehlern (z.B. Tippfehler) als auch bei komplexeren Interaktionen (z.B. Pufferüberläufe, SQL-Injections, etc.)
 \end{itemize}
-
 Schwächen
 \begin{itemize}
 \item Viele Sicherheitslücken sind sehr schwer automatisch zu finden, z.B. bei Authentifizierung, Zugriffskontrollen, unsichere Verwendung von Kryptographie, etc.
 \item Hohe Falsch-Positiv-Rate
-\item Kann oft keine Konfigurationsprobleme erkennen 
+\item Konfigurationsprobleme können nicht bzw. nur schwer erkannt werden
 \item Schwer nachzuweisen, dass ein gefundenes Sicherheitsproblem eine tatsächliche Gefährdung darstellt
 \item Schwierigkeiten bei der Analyse von Codestücken, die nicht kompiliert werden können, z.B. wenn entsprechende Referenz-Bibliotheken nicht mitgeliefert wurden zum Testen
 \end{itemize}
-
-Grenzen https://www.owasp.org/index.php/Static_Code_Analysis
-False Positives
-A static code analysis tool will often produce false positive results where the tool reports a possible vulnerability that in fact is not. This often occurs because the tool cannot be sure of the integrity and security of data as it flows through the application from input to output.
-False positive results might be reported when analysing an application that interacts with closed source components or external systems because without the source code it is impossible to trace the flow of data in the external system and hence ensure the integrity and security of the data.
-
-False Negatives
-The use of static code analysis tools can also result in false negative results where vulnerabilities result but the tool does not report them. This might occur if a new vulnerability is discovered in an external component or if the analysis tool has no knowledge of the runtime environment and whether it is configured securely.
-
+\paragraph{Grenzen\footnote{vgl. \url{https://www.owasp.org/index.php/Static_Code_Analysis}}:} 
+Falsch Positiv
+Eine statische Code Analyse führt häufig zu falsch positiv Ergebnissen, bei denen das Tool eine Schwachstelle aufzeigt, welche eigentlich keine ist. Das tritt auf, wenn das Tool die Integrität und Sicherheit des Datenflusses durch die Applikation von Eingang zum Ausgang nicht immer nachvollziehen kann. Beispiele dafür sind, wenn Programmcode analysiert wird, welcher mit Closed-Source-Software oder externen Komponenten interagiert. 
+Falsch Negativ
+Falsch negativ Ergebnisse können ebenso auftreten, wenn Schwachstellen auftreten, diese aber nicht vom Tool gemeldet werden. Dies kann dann vorkommen, wenn eine neue Schwachstelle in einer externen Komponente entdeckt wurde oder das Tool keine Kenntnis von der Laufzeitumgebung und ob diese sicher konfiguriert wurde.
 Abgrenzung zu Code Review
-Statische Analyse darf nicht verwechselt werden mit Code Reviews, welches eine manuelle Prüfung von Source-Code durch eine weitere Person darstellt.
-\begin{itemize}
-\item Ersetzt diese nicht
-\item Anderer Ansatz / Ziel
-\item Statische Analyse ermöglicht erst ein effizientes Code Review (durch Korrektheit der ‚Syntax‘ und übersichtlich gestalteten Code ….)
-\item Code Review überprüft Semantik / Statische Analyse Syntax
-\item Alle Vorgaben abgedeckt / erfüllen sie ihren Sinn und Zweck
-\item Verständlicher Code? Variablen gut benannt? Kommentare ausreichend? Verbesserungen im Code bzw. in der Struktur möglich (alternativer Ansatz)? …
-\end{itemize}
-
-
-
-
-
-
+Statische Analyse darf nicht verwechselt werden mit Code Reviews. Die Analyse kann Teil eines Review Prozesses sein und optimiert diesen insofern, dass durch die vorgeschlagenen Verbesserungen der Code schon syntaktisch korrekt und übersichtlich vorbereitet ist. 
+Ein Code Review geht prinzipiell noch einen Schritt weiter und verfolgt teilweise komplett andere Ziele. So prüft eine statische Analyse beispielsweise ob eine Funktion generell dokumentiert ist, bei dem Code Review wird zusätzlich betrachtet, ob die Funktion ausreichend und verständlich erklärt wurde.
+Somit ist ein Code Review immer eine manuelle Prüfung des Source-Codes durch mindestens eine weitere Person. Dabei wird die Aufmerksamkeit auf Punkte wie die Verständlichkeit des Codes oder sinnvoll benannte Variablen gelegt. Ebenso können Verbesserungen im Code bzw. in dessen Struktur und mögliche alternative Lösungsansätze betrachtet werden.
