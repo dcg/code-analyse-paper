@@ -1,13 +1,13 @@
 \section{Bewertung}
-Viele Tools lassen sich einfach in gängige Entwicklungsumgebungen einbinden und brauchen nur geringe Einarbeitungszeit. Gleichzeitig liefern sie einen hohen Nutzen für die Entwickler. Der Quellcode kann direkt analysiert werden und der Entwickler erhält eine direkte Rückmeldung. Die Automatisierung des Tools führt zu sauberem Code und verbessert dadurch die Wartbarkeit.
+Viele Tools lassen sich einfach in gängige Entwicklungsumgebungen einbinden und brauchen nur wenig Einarbeitungszeit. Gleichzeitig liefern sie einen hohen Nutzen für die Entwickler. Der Quellcode kann direkt analysiert werden und der Entwickler erhält eine direkte Rückmeldung. Die Automatisierung des Tools führt zu sauberem Code und verbessert dadurch die Wartbarkeit.
 
-Des Weiteren ist es empfehlenswert sich mit den Tools zur Erhöhung der Sicherheit des Codes zu befassen und diese als Teil des Entwicklungsprozesses einzubinden. Den größten Nutzen haben die Tools, wenns sie in einem Continuous Integration System genutzt werden, sodass der Code automatisch bei jedem commit analysiert wird.
+Des Weiteren ist es empfehlenswert, sich mit den Tools zur Erhöhung der Sicherheit des Codes zu befassen und diese als Teil des Entwicklungsprozesses einzubinden. Den größten Nutzen haben die Tools, wenns sie in einem Continuous Integration System genutzt werden, sodass der Code automatisch bei jedem commit analysiert wird.
 
 Bei der großen Anzahl verschiedener Tools ist es schwierig Empfehlungen für einzelne Produkte auszusprechen. Denn auch im Bereich der statischen Analyse Tools gibt es keine \emph{silver bullet}, welche für alle Anwendungsfälle am besten passt. Wie bei jedem Programm müssen auch hier Kompromisse eingegangen werden. Die Auswahl der richtigen Tools sollte daher sorgfältig überdacht werden. Wenn man allerdings in der Java-Welt zuhause ist und man sich in die statische Codeanalyse einarbeiten möchte, kann das hervorragende FindBugs von UMD\footnote{http://findbugs.sourceforge.net/team.html} als sicherer Anfangspunkt gewählt werden.
 \\\\
 Folgende Vorbehalte sollten bei der Verwendung statistische Analysetools nicht außer Acht gelassen werden:
 \begin{enumerate}
-  \item Das schlechte Image das manchen Tools anhaftet, dass sie häufig falsche Positive aufzeigen, ist teilweise berechtigt. In diesen Fällen ist es notwending die Einstellungen der Programme auf den Anwendungsfall abzustimmen um gute Ergebnisse für die betreffende Umgebung zu erhalten. Dieser Schritt erfodert zusätzlichen Aufwand den es zu berücksichtigen gilt, welcher aber den Nutzen des Produkts drastisch verbessern kann.
+  \item Das schlechte Image das manchen Tools anhaftet, dass sie häufig falsche Positive aufzeigen, ist teilweise berechtigt. In diesen Fällen ist es notwending, die Einstellungen der Programme auf den Anwendungsfall abzustimmen um gute Ergebnisse für die betreffende Umgebung zu erhalten. Dieser Schritt erfodert zusätzlichen Aufwand den es zu berücksichtigen gilt, welcher aber den Nutzen des Produkts drastisch verbessern kann.
   \item Werden statische Analyse Tools für sicherheitsrelevante Überprüfungen eingesetzt ist zu beachten, dass diese Tools der Unterstützung dienen, keinesfalls aber eine vollständige Testabdeckung gewährleisten.
 \end{enumerate}
 
