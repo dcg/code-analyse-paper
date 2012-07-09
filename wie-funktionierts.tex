@@ -38,7 +38,10 @@ Die Analyse des ASTs ist zwar nich so performant, wie das einfache Scannen von B
 Bei der Transformation von Quelltext zu einem Abstract Syntax Tree gehen (im Gegensatz zu Bytecode) keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
 Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu travasieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, dass den erzeugten AST darstellt, und in dem man explorativ dieses Baum travasieren kann.
 
-% ####PMD-Dev-Bild####.
+\begin{figure}[htbp]
+\includegraphics[width=10cm]{pmd-dev}
+\caption{PMD Entwicklungs Werkzeug}
+\end{figure}
 
 Die Analyse auf einem AST bietet einen weiteren Vorteil. Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine vielzahl von Werkzeugen die auf Ihnen operrieren können. Das in diesem Kontext wichtigste ist XPath.
 
@@ -47,7 +50,8 @@ PMD bietet neben der Schnitstelle für in Java implementierte Regeln, ebenfalls 
 XPath oder auch XML Path Language ist eine vom W3-Konsortium entwickelte Abfragesprache, um Teile eines XML-Dokumentes (welches ebenfalls Bäume sind) abzufragen. Dabei bietet es eine sehr einfache Möglichkeit, Bäume zu travasieren.
 
 \begin{lstlisting}
-exp: //child:Buch[count(./Seite)<=100]/count(.Seite)>=10]
+//child:Buch[count(./Seite)<=100]
+/count(.Seite)>=10]
 \end{lstlisting}
 
 Das Beispiel würde z.B. alle Bücher aus einem Baum liefern, das maximal 100 doch mindestens 10 Kindelemente/Seiten hat.
@@ -61,13 +65,14 @@ PMD besitzt ebenfalls ein Konsolen-Tool, das sich sehr gut in den Build-Prozess 
 
 Checkstyle ist das dritte wichtige statische Code Analyse Tool in der Java-Welt. Der Fokus von Checkstyle liegt weder in der effizenten Nutzung der JVM noch in dem Auffinden von Programmierfehlern, sondern vor allem in der Prüfung eines einheitlichen Programmierstils. 
 Dafür liefert Checkstyle viele Regeln von Haus aus mit, die in Form von Modulen gruppiert sind. Einige Beispiele an mitgliefierten Modulen sind:
-* Class Design, welches Prüfungen zum Softwaredesign beinhaltet
-* Coding, welches allgemeine Codingguidelines pürft.
-* Javadoc Comments zum Prüfen der Vollständigkeit und der richtigen Formatierung von Javadoc-Kommentaren
-* Metrics zur Einhaltung diverser Sofwaremetriken
-* Naming Convetions, um die Einhaltung von Namenskonventionen zu prüfen
-* Whitspaces zur Prüfung des Quelltextes hinsichtlich Leerzeichen und korrekter Einrückung.
-
+\begin{itemize}
+\item Class Design, welches Prüfungen zum Softwaredesign beinhaltet
+\item Coding, welches allgemeine Codingguidelines pürft.
+\item Javadoc Comments zum Prüfen der Vollständigkeit und der richtigen Formatierung von Javadoc-Kommentaren
+\item Metrics zur Einhaltung diverser Sofwaremetriken
+\item Naming Convetions, um die Einhaltung von Namenskonventionen zu prüfen
+\item Whitspaces zur Prüfung des Quelltextes hinsichtlich Leerzeichen und korrekter Einrückung.
+\end{itemize}
 Checksyle arbeitet ähnlich wie PMD auf dem AST und kann durch eigene Java-Module, die ebenfalls auf dem AST arbeiten, erweitert werden. Checkstyle bietet zur Erweierung noch eine weitere sehr nützliche Schnitstelle. So bietet das Modul 'Regexp' es dem Entwickler an, eigene Regeln mithilfe von regulären Ausdrücken zu schreiben. Dies dürfte gerade beim Überprüfen von Codeguildelines oft als ausreichend empfunden werden und bietet eine sehr einfache Schnitstelle, um Checkstyle zu erweitern.
 
 Checkstyle lässt sich wie PMD und FindBugs sehr einfach über ein Konsolen-Werkzeug in den Build-Prozess einbinden und bietet ein gut funktionierendes Eclipse-Plugin.
@@ -81,38 +86,4 @@ Das Ziel von Emma ist zu analysieren, welcher Code durchlaufen wird. Diese Infor
 Wie bereits erwähnt, ist Emma kein Werkzeug der statischen Code-Analyse. Die Funktionsweise von Emma basiert auf der Instrumentierung von Java Bytecode. Dazu untersützt Emma zwei Verfahren. Zum einen kann in einem zweiten "compile" Schritt der Bytecode um entsprechende Hooks erweitert werden, die dem Emma Toolkit die nötigen Daten über den durchlaufenden Code geben, und zum Anderen kann die Applikation mit einem speziellen Emma-Classloader gestartet werden, der den geladenen Bytecode on-the-fly instrumentiert. Als nächstes wird ein Driver benötigt, der den Instrumentierten Code durchläuft. Dies kann sowohl durc ein manuelles bedienen der Applikation geschehen, als auch durch automatische Tests. Der am weitestverbreiteste Anwendungsfall ist wohl die bereits erwähnte Testabdeckung bei Unit-Tests. Aber als reines Code Coverage Tool ist Emma natürlich wesentlich vielseitiger. So kann ein weiterer Interessanter Ansatz sein, dass man sich in (geerbtem) Spagetthi-Code einen schnellen Überblick verschaffen will, welcher Code bei einer Benutzeraktion durchlaufen wird.
 
 Emma lässt sich über Ant und Maven Plugins gut in den BuildProzess inegrieren und bietet gerade für den Fall der Testabdeckung mit EclEmma ein sehr gutes Eclipse Plugin.
-
-% ###############
-----
-
-FindBugs analyisiert Bytecode nach Pattern
-Wie funktioniert Bytecode -> Src-Zeile
-BCEL
-state class method, bytecode scanning
-------------------------------------------------------
-
-PMD arbeitet auf dem AST > einfacher, aber langsamer
-PMD unterstüzt auch XPATH
-------------------------------------------------------
-Checkstyle arbeitet ebenfalls auf dem AST
-
-
-To find unused public methods -- as it turns out I wrote a tool to do this last week at my work. I did not use Checkstyle at all as it is much easier to analyse the byte code using a library like ASM. This is also how FindBugs works, and I would recommend this approach when you need rich type information. 
-
-
-Checkstyle ist modular aufgebaut. Die Module können durch Konfiguration kombiniert werden. Einige 
-
-Module bieten Schnittstellen zur Erweiterung. Die Module bilden eine Hierarchie. Auf oberster Ebene 
-
-liegt das Modul Checker, das die zu prüfenden Dateien einliest. Auf der nächsten Ebene liegen Module, 
-
-die das Interface FileSetCheck implementieren und die eingelesenen Dateien vom Checker übergeben 
-
-bekommen. Das Interface FileSetCheck definiert Methodensignaturen zum Entgegennehmen von Dateien 
-
-und Werfen von Fehlern. Zu diesen gehört der Treewalker. Die meisten Checks (Prüfungen von 
-
-Programmierrichtlinien) sind als Submodule des Treewalker implementiert.
-
-
 
