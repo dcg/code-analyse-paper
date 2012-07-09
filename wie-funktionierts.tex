@@ -46,7 +46,9 @@ PMD bietet neben der Schnitstelle für in Java implementierte Regeln, ebenfalls 
 
 XPath oder auch XML Path Language ist eine vom W3-Konsortium entwickelte Abfragesprache, um Teile eines XML-Dokumentes (welches ebenfalls Bäume sind) abzufragen. Dabei bietet es eine sehr einfache Möglichkeit, Bäume zu travasieren.
 
+\begin{lstlisting}
 exp: //child:Buch[count(./Seite)<=100]/count(.Seite)>=10]
+\end{lstlisting}
 
 Das Beispiel würde z.B. alle Bücher aus einem Baum liefern, das maximal 100 doch mindestens 10 Kindelemente/Seiten hat.
 
