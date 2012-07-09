@@ -38,7 +38,7 @@ Die Analyse des ASTs ist zwar nich so performant, wie das einfache Scannen von B
 Bei der Transformation von Quelltext zu einem Abstract Syntax Tree gehen (im Gegensatz zu Bytecode) keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
 Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu travasieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, dass den erzeugten AST darstellt, und in dem man explorativ dieses Baum travasieren kann.
 
-####PMD-Dev-Bild####.
+% ####PMD-Dev-Bild####.
 
 Die Analyse auf einem AST bietet einen weiteren Vorteil. Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine vielzahl von Werkzeugen die auf Ihnen operrieren können. Das in diesem Kontext wichtigste ist XPath.
 
@@ -80,7 +80,7 @@ Wie bereits erwähnt, ist Emma kein Werkzeug der statischen Code-Analyse. Die Fu
 
 Emma lässt sich über Ant und Maven Plugins gut in den BuildProzess inegrieren und bietet gerade für den Fall der Testabdeckung mit EclEmma ein sehr gutes Eclipse Plugin.
 
-###############
+% ###############
 
 FindBugs analyisiert Bytecode nach Pattern
 Wie funktioniert Bytecode -> Src-Zeile
