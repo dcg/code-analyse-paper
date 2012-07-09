@@ -3,7 +3,7 @@
 Dieses Kapitel wird sich mit der internen Funktionsweise der gebräuchlichsten statischen Code Analyse Tools für Java beschäftigen. Diese sind wie in vorherigen Kapiteln dargestellt: Findbugs, Checkstyle, PMD sowie Emma, welches den Code zwar nicht statisch analysiert, im Rahmen der Vorlesung aber trotzdem im Context der statischen Analyse besprochen wurde.
 
 
---- FindBugs ---
+\subsection{FindBugs}
 
 FindBugs ist ein von der Universität von Maryland initiiertes Software-Projekt zur statischen Code Analyse. FindBugs genießt große Verbreitung in der Industrie und wird von Firmen wie Google und ehemals Sun Microsystems nun Oracle unterstüzt.
 FindBugs arbeitet vollständig auf dem Java-Bytecode und kann dadurch auch auf "binären" Projektdistributionen durchgeführt werden. 
@@ -24,7 +24,7 @@ Die Analyse des Bytecodes hat aber auch positive Seiten. So ist zum einen die An
 In der Usability bietet FindBugs auch Vorteile gegenüber anderen Tools. So bietet es zum einen eine sehr gute und aktuelle Integration in viele Eclipse und viele andere Entwicklungsumgebungen und lässt sich zum anderen über ein Konsolen-Tool einfach in automatische Build-Prozesse einbinden.
 
 
---- PMD ---
+\subsection{PMD}
 PMD, dessen Name nach eigenen Aussagen des Projekts keine ausgeschriebe Bedeutung hat, ist ebenfalls ein Werkzeug zur statischen Code Analyse von Java-Code. 
 
 PMD liefert ebenfalls eine Vielzahl an eingebauten Regeln, die anders als bei FindBugs nicht so sehr auf potentielle Fehler, sondern eher auf ineffizenten Code ausgelegt sind. Beispiele hierfür sind z.B. leere Blöcke, toter Code oder die falsche Verwendung von Strings und StringBuffern. 
@@ -38,7 +38,7 @@ Die Analyse des ASTs ist zwar nich so performant, wie das einfache Scannen von B
 Bei der Transformation von Quelltext zu einem Abstract Syntax Tree gehen (im Gegensatz zu Bytecode) keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
 Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu travasieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, dass den erzeugten AST darstellt, und in dem man explorativ dieses Baum travasieren kann.
 
-####PMD-Dev-Bild####.
+% ####PMD-Dev-Bild####.
 
 Die Analyse auf einem AST bietet einen weiteren Vorteil. Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine vielzahl von Werkzeugen die auf Ihnen operrieren können. Das in diesem Kontext wichtigste ist XPath.
 
@@ -46,7 +46,9 @@ PMD bietet neben der Schnitstelle für in Java implementierte Regeln, ebenfalls 
 
 XPath oder auch XML Path Language ist eine vom W3-Konsortium entwickelte Abfragesprache, um Teile eines XML-Dokumentes (welches ebenfalls Bäume sind) abzufragen. Dabei bietet es eine sehr einfache Möglichkeit, Bäume zu travasieren.
 
+\begin{lstlisting}
 exp: //child:Buch[count(./Seite)<=100]/count(.Seite)>=10]
+\end{lstlisting}
 
 Das Beispiel würde z.B. alle Bücher aus einem Baum liefern, das maximal 100 doch mindestens 10 Kindelemente/Seiten hat.
 
@@ -55,7 +57,7 @@ Diese XPath-Ausdrücke können direkt in den PMD-Konfigurations-Files angegeben 
 PMD besitzt ebenfalls ein Konsolen-Tool, das sich sehr gut in den Build-Prozess integrieren lässt. Das entsprechende Eclipse Plugin ist zum Zeitpunkt dieses Papers leider nicht auf dem aktuellsten Stand und nutzt noch PMD Version 4, welche zur Version 5 inkompatibele Konfigurations-Dateien besitzt. Soll also die aktuellste PMD Version 5 im Build-Prozess verwendet werden, müssen zwei Konfigurations-Dateien für Version 4 und 5 gepflegt werden.
 
 
-----Checkstyle ---
+\subsection{Checkstyle}
 
 Checkstyle ist das dritte wichtige statische Code Analyse Tool in der Java-Welt. Der Fokus von Checkstyle liegt weder in der effizenten Nutzung der JVM noch in dem Auffinden von Programmierfehlern, sondern vor allem in der Prüfung eines einheitlichen Programmierstils. 
 Dafür liefert Checkstyle viele Regeln von Haus aus mit, die in Form von Modulen gruppiert sind. Einige Beispiele an mitgliefierten Modulen sind:
@@ -71,7 +73,7 @@ Checksyle arbeitet ähnlich wie PMD auf dem AST und kann durch eigene Java-Modul
 Checkstyle lässt sich wie PMD und FindBugs sehr einfach über ein Konsolen-Werkzeug in den Build-Prozess einbinden und bietet ein gut funktionierendes Eclipse-Plugin.
 
 
---- Emma ---
+\subsection{Emma}
 
 Emma ist eine Code Coverage Library von Vlad Roubtsov. Sie zählt eigentlich nicht zu den statischen Code Analyse Tools, soll aber, da sie im Rahmen der Vorlesung im Kontext solcher behandelt wurde, hier kurz erläutert und zur statischen Code Analyse abgegrenzt werden. 
 Das Ziel von Emma ist zu analysieren, welcher Code durchlaufen wird. Diese Information ist zum Beispiel für die Ermittlung einer Testabdeckung sehr interessant. Emma untersützt dabei eine Vielzahl von Metriken, die aber in den entsprechenden Ausarbeitungen zum Thema Testabdeckung zu finden sind. In diesem Kontext soll nun auf die Funktionsweise von Emma eingegangen werden.
@@ -80,7 +82,8 @@ Wie bereits erwähnt, ist Emma kein Werkzeug der statischen Code-Analyse. Die Fu
 
 Emma lässt sich über Ant und Maven Plugins gut in den BuildProzess inegrieren und bietet gerade für den Fall der Testabdeckung mit EclEmma ein sehr gutes Eclipse Plugin.
 
-###############
+% ###############
+----
 
 FindBugs analyisiert Bytecode nach Pattern
 Wie funktioniert Bytecode -> Src-Zeile

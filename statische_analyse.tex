@@ -9,19 +9,21 @@ Patrick Nisch \\
 Patrick Permien
 }
 \date{\today}
-\documentclass[12pt]{article}
+\documentclass[12pt,twocolumn]{article}
 % encoding:
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[german]{babel}
 \usepackage[authoryear]{natbib}
 \usepackage[hyphens]{url}
+\usepackage{listings} \lstloadlanguages{}
+
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Eine kurze Einführung in das Thema der Statischen Code Analyse, einem Einblick in die Funktionsweise, eine Übersicht über verschiedene Tools und abschließender Bewertung.
+Diese Ausarbeitung enthält eine kurze Einführung in das Thema der Statischen Code Analyse. Sie bietet eine Übersicht über verschiedene dafür geeignete Werkzeuge und bietet einen Einblick in deren Funktionsweise sowie eine abschließende Bewertung.
 \end{abstract}
 
 \include{einleitung}
@@ -30,7 +32,7 @@ Eine kurze Einführung in das Thema der Statischen Code Analyse, einem Einblick 
 
 \include{wie-funktionierts}
 
-\section{Bewertung}
+\include{bewertung}
 
 \clearpage
 \bibliographystyle{dcu_url}
