@@ -36,44 +36,43 @@ PMD arbeitet, anders als FindBugs, nicht auf den binären Java Class-Dateien, so
 Die Analyse des ASTs ist zwar nicht so performant wie das einfache Scannen von Bytecode, besitzt für das Entwicklen von eigenen Regeln aufgrund der Nähe zum Quellcode aber entsprechende Vorteile.
 
 Bei der Transformation des Quelltextes zu einem Abstract Syntax Tree gehen im Gegensatz zu Bytecode keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
-Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu travasieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, dass den erzeugten AST darstellt, und in dem man explorativ dieses Baum travasieren kann.
+Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu traversieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, das den erzeugten AST darstellt, und in dem man explorativ diese Baumstruktur traversieren kann.
 
 \begin{figure}[htbp]
 \includegraphics[width=10cm]{pmd-dev}
-\caption{PMD Entwicklungs Werkzeug}
+\caption{Bildschirmfoto des Entwicklungswerkzeugs PMD}
 \end{figure}
 
-Die Analyse auf einem AST bietet einen weiteren Vorteil. Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine vielzahl von Werkzeugen die auf Ihnen operrieren können. Das in diesem Kontext wichtigste ist XPath.
+Die Analyse auf einem AST bietet einen weiteren Vorteil: Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine Vielzahl von Werkzeugen die auf ihnen operieren können. Das in diesem Kontext wichtigste Werkzeug ist \textit{XPath}.
 
-PMD bietet neben der Schnitstelle für in Java implementierte Regeln, ebenfalls eine Schnittstelle für XPath. 
+PMD bietet neben der Schnitstelle für in Java implementierte Regeln auch eine Schnittstelle für XPath an.
 
-XPath oder auch XML Path Language ist eine vom W3-Konsortium entwickelte Abfragesprache, um Teile eines XML-Dokumentes (welches ebenfalls Bäume sind) abzufragen. Dabei bietet es eine sehr einfache Möglichkeit, Bäume zu travasieren.
+XPath oder auch \textit{XML Path Language} ist eine vom W3-Konsortium entwickelte Abfragesprache, um Teile eines XML-Dokumentes abzufragen, welche ebenfalls Bäume sind. Dabei bietet es eine sehr einfache Möglichkeit, Bäume zu travasieren. Das folgende Beispiel würde z.B. alle Bücher aus einem Baum liefern, das maximal 100, jedoch mindestens 10 Kindelemente/Seiten hat:
+
 
 \begin{lstlisting}
 //child:Buch[count(./Seite)<=100]
 /count(.Seite)>=10]
 \end{lstlisting}
 
-Das Beispiel würde z.B. alle Bücher aus einem Baum liefern, das maximal 100 doch mindestens 10 Kindelemente/Seiten hat.
+Diese XPath-Ausdrücke können direkt in den PMD-Konfigurations-Dateien angegeben werden und machen es so für einfache und mittelmäßig komplexe Regeln überflüssig, eigene Java-Module zu implementieren.
 
-Diese XPath-Ausdrücke können direkt in den PMD-Konfigurations-Files angegeben werden und machen es so für einfache und mittel komplexe Regeln überflüssig, eigene Java-Module zu implementieren.
-
-PMD besitzt ebenfalls ein Konsolen-Tool, das sich sehr gut in den Build-Prozess integrieren lässt. Das entsprechende Eclipse Plugin ist zum Zeitpunkt dieses Papers leider nicht auf dem aktuellsten Stand und nutzt noch PMD Version 4, welche zur Version 5 inkompatibele Konfigurations-Dateien besitzt. Soll also die aktuellste PMD Version 5 im Build-Prozess verwendet werden, müssen zwei Konfigurations-Dateien für Version 4 und 5 gepflegt werden.
+PMD bietet ebenfalls ein Konsolen-Tool, das sich sehr gut in Build-Prozesse integrieren lässt. Das entsprechende Eclipse Plugin ist zum aktuellen Zeitpunkt (Juli 2012) leider nicht auf dem aktuellsten Stand: Es arbeitet noch mit PMD Version 4, welche zur Version 5 inkompatibele Konfigurations-Dateien nutzt. Soll also die aktuellste PMD Version 5 im Build-Prozess verwendet werden, müssen zwei Konfigurations-Dateien für Version 4 und 5 gepflegt werden.
 
 
 \subsection{Checkstyle}
 
-Checkstyle ist das dritte wichtige statische Code Analyse Tool in der Java-Welt. Der Fokus von Checkstyle liegt weder in der effizenten Nutzung der JVM noch in dem Auffinden von Programmierfehlern, sondern vor allem in der Prüfung eines einheitlichen Programmierstils. 
-Dafür liefert Checkstyle viele Regeln von Haus aus mit, die in Form von Modulen gruppiert sind. Einige Beispiele an mitgliefierten Modulen sind:
+Checkstyle ist das dritte wichtige Werkzeug zur statischen Code Analyse in der Java-Welt. Der Fokus von Checkstyle liegt weder in der effizenten Nutzung der JVM noch in dem Auffinden von Programmierfehlern, sondern vor allem in der Prüfung des Quellcodes auf die Einhaltung eines einheitlichen Programmierstils. 
+Dafür liefert Checkstyle viele Regeln von Haus aus mit, die in Modulen gruppiert sind. Einige Beispiele an mitgliefierten Modulen sind:
 \begin{itemize}
-\item Class Design, welches Prüfungen zum Softwaredesign beinhaltet
-\item Coding, welches allgemeine Codingguidelines pürft.
-\item Javadoc Comments zum Prüfen der Vollständigkeit und der richtigen Formatierung von Javadoc-Kommentaren
-\item Metrics zur Einhaltung diverser Sofwaremetriken
-\item Naming Convetions, um die Einhaltung von Namenskonventionen zu prüfen
-\item Whitspaces zur Prüfung des Quelltextes hinsichtlich Leerzeichen und korrekter Einrückung.
+\item \textit{Class Design}, welches Prüfungen zum Softwaredesign beinhaltet
+\item \textit{Coding}, das allgemeine Coding Guidelines prüft
+\item \textit{Javadoc Comments} zum Prüfen der Vollständigkeit und der richtigen Formatierung von Javadoc-Kommentaren
+\item \textit{Metrics} zum Sicherstellen der  Einhaltung diverser Sofwaremetriken
+\item \textit{Naming Conventions}, um die Einhaltung von Namenskonventionen zu prüfen
+\item \textit{Whitspaces} zur Prüfung des Quelltextes hinsichtlich Leerzeichen und korrekter Einrückung
 \end{itemize}
-Checksyle arbeitet ähnlich wie PMD auf dem AST und kann durch eigene Java-Module, die ebenfalls auf dem AST arbeiten, erweitert werden. Checkstyle bietet zur Erweierung noch eine weitere sehr nützliche Schnitstelle. So bietet das Modul 'Regexp' es dem Entwickler an, eigene Regeln mithilfe von regulären Ausdrücken zu schreiben. Dies dürfte gerade beim Überprüfen von Codeguildelines oft als ausreichend empfunden werden und bietet eine sehr einfache Schnitstelle, um Checkstyle zu erweitern.
+Checksyle arbeitet ähnlich wie PMD auf dem AST und kann durch eigene Java-Module erweitert werden, die ebenfalls auf dem AST arbeiten. Checkstyle bietet zur Erweierung noch eine weitere sehr nützliche Schnitstelle. So bietet das Modul ``Regexp'' es dem Entwickler an, eigene Regeln mithilfe von regulären Ausdrücken zu schreiben. Dies dürfte gerade beim Überprüfen von Coding Guildelines oft als ausreichend empfunden werden und bietet eine sehr einfache Schnittstelle, um Checkstyle zu erweitern.
 
 Checkstyle lässt sich wie PMD und FindBugs sehr einfach über ein Konsolen-Werkzeug in den Build-Prozess einbinden und bietet ein gut funktionierendes Eclipse-Plugin.
 
