@@ -1,41 +1,41 @@
 \section{Funktionsweise der Werkzeuge}
 
-Dieses Kapitel wird sich mit der internen Funktionsweise der gebräuchlichsten statischen Code Analyse Tools für Java beschäftigen. Diese sind wie in vorherigen Kapiteln dargestellt: Findbugs, Checkstyle, PMD sowie Emma, welches den Code zwar nicht statisch analysiert, im Rahmen der Vorlesung aber trotzdem im Context der statischen Analyse besprochen wurde.
+Dieses Kapitel erläutet die interne Funktionsweise der gebräuchlichsten statischen Code Analyse Tools für Java. Diese sind wie in vorherigen Kapiteln dargestellt: Findbugs, Checkstyle, PMD sowie Emma, welches den Code zwar nicht statisch analysiert, im Rahmen der Vorlesung aber trotzdem im Kontext der statischen Analyse besprochen wurde.
 
 
 \subsection{FindBugs}
 
-FindBugs ist ein von der Universität von Maryland initiiertes Software-Projekt zur statischen Code Analyse. FindBugs genießt große Verbreitung in der Industrie und wird von Firmen wie Google und ehemals Sun Microsystems nun Oracle unterstüzt.
-FindBugs arbeitet vollständig auf dem Java-Bytecode und kann dadurch auch auf "binären" Projektdistributionen durchgeführt werden. 
+FindBugs ist ein von der Universität von Maryland initiiertes Software-Projekt zur statischen Code Analyse. FindBugs ist in der Industrie weit verbreitet im Einsatz und wird von Firmen wie Google und Oracle (ehemals Sun Microsystems) unterstüzt.
+FindBugs arbeitet vollständig auf dem Java-Bytecode und kann dadurch auch ``binäre'' Projektdistributionen analysieren. 
 
-FindBugs bietet eine große Anzahl an mitgelieferten Fehler-Pattern, die in verschiedene Warnstufen eingeteilt sind. Ihr Hauptfokus liegt auf der Erkennung von fehlerhaftem Code, der bei der Ausführung zu Runtime-Fehlern führen würde.
+FindBugs bietet eine große Anzahl an mitgelieferten Fehlermustern, die in verschiedene Warnstufen eingeteilt sind. Ihr Hauptfokus liegt auf der Erkennung von fehlerhaftem Code, der bei der Ausführung zu Laufzeitfehlern führen würde.
 
-Möchte man seine eigenen Fehler-Pattern hinzufügen, bietet Findbugs dafür ein Plugin Konzept, welches allerdings ein Verständnis der internen Funktionsweise von FindBugs voraussetzt.
+Möchte man seine eigenen Fehlermuster (Patterns) hinzufügen, so bietet Findbugs dafür ein Plugin-Konzept, welches allerdings ein Verständnis der internen Funktionsweise von FindBugs voraussetzt.
  
-FindBugs nutzt für die ByteCode Analyse die Apache BCEL Library, welche eine gut nutzbare Schnitstelle zu komplierten Java Class Files bietet, welche in vielen Bytecode-nahen Projekten eingesetzt wird.
+FindBugs nutzt für die Bytecode-Analyse die \textit{Apache BCEL Library}\footnote{Byte Code Engineering Library}. Diese bietet eine gut nutzbare Schnittstelle zu kompilierten Java-Class-Dateien, welche in vielen Bytecode-nahen Projekten eingesetzt wird. % "zu" class-Dateien oder "für"?
 
-Dies kann für Entwickler einen großen Nachteil bedeuten, da die wenigstens ein Verständnis von ByteCode haben. Man muss beachten, dass die baumartige Struktur des Sourcecodes im Bytecode, wie auch in Maschinensprache, zu einer flachen sequenziellen Abfolge von Instruktionen wird. 
+Dies kann für Entwickler einen großen Nachteil bedeuten, da die Wenigsten ein Verständnis von Bytecode haben. Man muss beachten, dass die baumartige Struktur des Quellcodes im Bytecode -- wie auch in Maschinensprache -- zu einer flachen sequenziellen Abfolge von Instruktionen wird. 
 
-Weiter erschwert das Erstellen eines eigenen Fehler-Pattern, dass der Bytecode sequenziell Durchlaufen wird und der Bytecode Scanner dabei bei jeder Instruktion die ihm zugeordnenten Fehler-Detectoren über ein Visitor-Pattern aufruft. 
-Dadurch ist der Entwickler des Fehler-Detektor dafür verantwortlich, sich die bereits gescannten Instruktionen in seinem State zu speichern. Hierfür bietet sich i.d.R. eine Statemaschine an. Aber auch dies ist ein Programmierparadigma, das bei vielen Entwicklern in Zeiten von OOP nicht mehr häufig genutzt wird und somit eine weitere Hürde in der Erstellung von eingenen Fehler-Mustern darstellt.
+Zudem erschwert das Erstellen eines eigenen Fehlermusters dass der Bytecode sequenziell Durchlaufen wird und der Bytecode-Scanner dabei bei jeder Instruktion die ihm zugeordnenten Fehler-Detektoren über ein Visitor-Pattern aufruft. 
+Dadurch ist der Entwickler des Fehler-Detektors dafür verantwortlich, sich die bereits gescannten Instruktionen in seinem Zustand zu speichern. Hierfür bietet sich in der Regel eine Zustandsmaschine an. Auch dies ist jedoch ein Programmierparadigma, das bei vielen Entwicklern in Zeiten von objektorientierter Programmierung nicht mehr häufig genutzt wird und somit eine weitere Hürde in der Erstellung von eigenen Fehler-Mustern darstellt.
 
-Die Analyse des Bytecodes hat aber auch positive Seiten. So ist zum einen die Analyse sehr perfomant, da sie einfach einer linearen Abarbeitung von Instruktionen entspricht und zum anderen ist die der Bytecode bereits durch den Java Compiler optimiert worden und somit verringert sich die Häufigkeit eines False-Positives.
+Die Analyse des Bytecodes hat aber auch positive Seiten. So ist zum Einen die Analyse sehr performant, da sie einfach einer linearen Abarbeitung von Instruktionen entspricht. Zum Anderen ist der Bytecode bereits durch den Java Compiler optimiert worden und somit verringert sich die Häufigkeit eines \textit{False-Positive}.
 
-In der Usability bietet FindBugs auch Vorteile gegenüber anderen Tools. So bietet es zum einen eine sehr gute und aktuelle Integration in viele Eclipse und viele andere Entwicklungsumgebungen und lässt sich zum anderen über ein Konsolen-Tool einfach in automatische Build-Prozesse einbinden.
+Hinsichtlich seiner Benutzerfreundlichkeit bietet FindBugs auch Vorteile gegenüber anderen Werkzeugen. So bietet es zum Einen eine sehr gute und aktuelle Integration in Eclipse und viele andere Entwicklungsumgebungen und lässt sich zum Anderen über ein Konsolen-Tool einfach in automatische Build-Prozesse einbinden.
 
 
 \subsection{PMD}
-PMD, dessen Name nach eigenen Aussagen des Projekts keine ausgeschriebe Bedeutung hat, ist ebenfalls ein Werkzeug zur statischen Code Analyse von Java-Code. 
+PMD, dessen Name nach eigenen Aussagen des Projektteams keine ausgeschriebe Bedeutung hat, ist ebenfalls ein Werkzeug zur statischen Code Analyse von Java-Quellcode. 
 
-PMD liefert ebenfalls eine Vielzahl an eingebauten Regeln, die anders als bei FindBugs nicht so sehr auf potentielle Fehler, sondern eher auf ineffizenten Code ausgelegt sind. Beispiele hierfür sind z.B. leere Blöcke, toter Code oder die falsche Verwendung von Strings und StringBuffern. 
+Auch PMD liefert eine Vielzahl an eingebauten Regeln, die anders als bei FindBugs nicht so sehr auf potentielle Fehler, sondern eher auf ineffizienten Code ausgelegt sind. Beispiele hierfür sind z.B. leere Blöcke, toter Code oder die falsche Verwendung von \verb=String= und \verb=StringBuffer=. 
 
-PMD besitzt weiter einen Copy/Paste Detector, der es erlaubt, mit des Rabin-Karp-Algorithmuses duplizierten Code zu finden.
+PMD besitzt weiter einen Copy/Paste-Detektor, der es erlaubt, mithilfe des Rabin-Karp-Algorithmus' duplizierten Code zu finden.
 
-PMD operiert, anders als FindBugs, nicht auf den binären Java Class Files, sondern auf dem Source-Code. Genauer gesagt, auf dem Abstract Syntax Tree, der aus dem Source-Code vor dem Erstellen des Bytecodes erzeugt wird. 
+PMD arbeitet, anders als FindBugs, nicht auf den binären Java Class-Dateien, sondern auf dem Quellcode. Genauer gesagt analysiert PMD auf der Ebene des \textit{Abstract Syntax Tree} (AST), der aus dem Quellcode vor dem Erstellen des Bytecode erzeugt wird. 
 
-Die Analyse des ASTs ist zwar nich so performant, wie das einfache Scannen von Bytecode, besitzt für das Entwicklen von eigenen Regeln aufgrund der Nähe zum Sourcecode aber entsprechende Vorteile.
+Die Analyse des ASTs ist zwar nicht so performant wie das einfache Scannen von Bytecode, besitzt für das Entwicklen von eigenen Regeln aufgrund der Nähe zum Quellcode aber entsprechende Vorteile.
 
-Bei der Transformation von Quelltext zu einem Abstract Syntax Tree gehen (im Gegensatz zu Bytecode) keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
+Bei der Transformation des Quelltextes zu einem Abstract Syntax Tree gehen im Gegensatz zu Bytecode keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
 Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu travasieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, dass den erzeugten AST darstellt, und in dem man explorativ dieses Baum travasieren kann.
 
 \begin{figure}[htbp]
