@@ -63,11 +63,11 @@ Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumg
 Eine statische Code Analyse führt häufig zu falsch eingeschätzten positiven Ergebnissen, bei denen das Tool eine Schwachstelle aufzeigt, welche eigentlich keine ist. Das tritt auf, wenn das Tool die Integrität und Sicherheit des Datenflusses durch die Applikation von Eingang zum Ausgang nicht immer nachvollziehen kann. Beispiele dafür sind, wenn Programmcode analysiert wird, welcher mit Closed-Source-Software oder externen Komponenten interagiert.
 
 \subparagraph{Falsch Negativ:}
-Falsch negativ Ergebnisse können ebenso auftreten, wenn Schwachstellen auftreten, diese aber nicht vom Tool gemeldet werden. Dies kann dann vorkommen, wenn eine neue Schwachstelle in einer externen Komponente entdeckt wurde oder das Tool keine Kenntnis von der Laufzeitumgebung und ob diese sicher konfiguriert wurde.
+Falsch negativ Ergebnisse können ebenso auftreten, wenn Schwachstellen auftreten, diese aber nicht vom Tool gemeldet werden. Dies kann dann vorkommen, wenn eine neue Schwachstelle in einer externen Komponente entdeckt wurde oder das Tool keine Kenntnis von der Laufzeitumgebung hat und ob diese sicher konfiguriert wurde.
 
 \paragraph{Abgrenzung zu Code Reviews:}
-Statische Analyse darf nicht verwechselt werden mit Code Reviews. Die Analyse kann Teil eines Review Prozesses sein und optimiert diesen insofern, dass durch die vorgeschlagenen Verbesserungen der Code schon syntaktisch korrekt und übersichtlich vorbereitet ist.
+Statische Analyse darf nicht verwechselt werden mit Code Reviews. Die Analyse kann Teil eines Review Prozesses sein und optimiert diesen insofern, dass durch die vorgeschlagenen Verbesserungen der Code syntaktisch korrekt und übersichtlich vorbereitet ist.
 
-Ein Code Review geht prinzipiell noch einen Schritt weiter und verfolgt teilweise komplett andere Ziele. So prüft eine statische Analyse beispielsweise ob eine Funktion generell dokumentiert ist, bei dem Code Review wird zusätzlich betrachtet, ob die Funktion ausreichend und verständlich erklärt wurde.
+Ein Code Review geht prinzipiell noch einen Schritt weiter und verfolgt teilweise auch andereweitige Ziele. So prüft eine statische Analyse beispielsweise, ob eine Funktion generell dokumentiert ist, bei einem Code Review wird zusätzlich betrachtet, ob die Funktion ausreichend und verständlich erklärt wurde.
 
 Somit ist ein Code Review immer eine manuelle Prüfung des Quellcodes durch mindestens eine weitere Person. Dabei wird die Aufmerksamkeit auf Punkte wie die Verständlichkeit des Codes oder sinnvoll benannte Variablen gelegt. Ebenso können Verbesserungen im Code bzw. in dessen Struktur und mögliche alternative Lösungsansätze betrachtet werden.
