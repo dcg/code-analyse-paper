@@ -5,7 +5,7 @@ Die Analyse gestattet eine frühzeitige Erkennung und somit die Korrektur von Fe
 
 Bei der statischen Analyse wird im Vergleich zu dynamischen Testverfahren, die zu testende Software nicht ausgeführt. Da der Quelltext benötigt wird, lässt sich die statische Analyse den White-Box-Testverfahren zuordnen.
 
-Die Analyse kann vollständig manuell durchgeführt werden, dies ist aber mit erheblichem Aufwand verbunden. Daher werden automatisierte Tools eingesetzt. Das erste Tool dieser Art war ``Lint'', welches seiner Zeit von den Bell Labs für die Programmiersprache C entwickelt wurde. Das heutzutage bekannteste Tool ist ``FindBugs'', auf dessen Funktionsweise und Umfang später noch näher eingegangen wird. Im Vergleich zu den frühen automatisierten Hilfen, werden heute neben funktionalen Fehlern auch sogenannter ``Code-Smell'' erkannt. Dies können beispielsweise Code-Duplizierungen oder ``toter Code'' (nicht-verwendeter Code) sein. Dabei kommen Techniken wie die Taint Analyse oder die Datenfluss Analyse zum Einsatz.
+Die Analyse kann vollständig manuell durchgeführt werden, dies ist aber mit erheblichem Aufwand verbunden. Daher werden automatisierte Tools eingesetzt. Das erste Tool dieser Art war ``Lint'', welches seiner Zeit von den Bell Labs für die Programmiersprache C entwickelt wurde. Das heutzutage bekannteste Tool ist ``FindBugs'', auf dessen Funktionsweise und Umfang später noch näher eingegangen wird. Im Vergleich zu den frühen automatisierten Hilfen, werden heute neben funktionalen Fehlern auch sogenannter ``Code-Smell'' erkannt. Dies können beispielsweise Code-Duplizierungen oder ``toter Code'' (nicht-verwendeter Code) sein. Dabei kommen Techniken wie die \emph{Taint Analyse} oder die \emph{Datenfluss Analyse} zum Einsatz.
 
 Das Ziel der statischen Analyse ist momentan nur das Aufzeigen von möglichen Fehlern, es wird keine automatische Korrektur des Codes vorgenommen. Idealerweise würden solche Tools mit einem hohen Maß an Zuverlässigkeit mutmaßliche Fehler und Sicherheitslücken automatisch erkennen und beheben. Dies ist jedoch noch nicht realisierbar. Momentan gibt es noch immer eine hohe Rate von Fehleinschätzungen.
 
@@ -43,7 +43,7 @@ Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumg
 \item Unerreichbarer Code
 \end{itemize}
 
-\paragraph{Stärken, Schwächen und Grenzen der statischen Analyse:}\footnote{vgl. \url{https://www.owasp.org/index.php/Static_Code_Analysis}} 
+\paragraph{Stärken, Schwächen und Grenzen der statischen Analyse:}\footnote{vgl. \url{https://www.owasp.org/index.php/Static_Code_Analysis}}
 \subparagraph{Stärken:}
 \begin{itemize}
 \item Skaliert sehr gut
@@ -60,7 +60,7 @@ Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumg
 \end{itemize}
 
 \subparagraph{Falsch Positiv:}
-Eine statische Code Analyse führt häufig zu falsch positiv Ergebnissen, bei denen das Tool eine Schwachstelle aufzeigt, welche eigentlich keine ist. Das tritt auf, wenn das Tool die Integrität und Sicherheit des Datenflusses durch die Applikation von Eingang zum Ausgang nicht immer nachvollziehen kann. Beispiele dafür sind, wenn Programmcode analysiert wird, welcher mit Closed-Source-Software oder externen Komponenten interagiert.
+Eine statische Code Analyse führt häufig zu falsch eingeschätzten positiven Ergebnissen, bei denen das Tool eine Schwachstelle aufzeigt, welche eigentlich keine ist. Das tritt auf, wenn das Tool die Integrität und Sicherheit des Datenflusses durch die Applikation von Eingang zum Ausgang nicht immer nachvollziehen kann. Beispiele dafür sind, wenn Programmcode analysiert wird, welcher mit Closed-Source-Software oder externen Komponenten interagiert.
 
 \subparagraph{Falsch Negativ:}
 Falsch negativ Ergebnisse können ebenso auftreten, wenn Schwachstellen auftreten, diese aber nicht vom Tool gemeldet werden. Dies kann dann vorkommen, wenn eine neue Schwachstelle in einer externen Komponente entdeckt wurde oder das Tool keine Kenntnis von der Laufzeitumgebung und ob diese sicher konfiguriert wurde.
