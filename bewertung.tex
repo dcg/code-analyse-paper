@@ -3,10 +3,8 @@ Viele der vorgestellten Tools lassen sich einfach in gängige Entwicklungsumgebu
 Durch die Integration in die Entwicklungsumgebung kann der Quellcode direkt analysiert werden und Entwickler halten direkte Rückmeldung über ihre Entwicklung. Desweiteren lassen sich viele Überprüfungen der Tools automatisieren, dies kann wahlweise in einem Continious Integration Servier (z.B. Jenkins) oder direkt beim einchecken in das Repository geschehen (z.B. Git-Hooks\footnote{\url{http://git-scm.com/book/en/Customizing-Git-Git-Hooks}}). Dies führt insgesamt zu einer saubereren, fehlerfreieren und verständlichern Codebasis.
 
 Bei der großen Anzahl verschiedener Tools ist es schwierig Empfehlungen für einzelne Produkte auszusprechen. Denn auch im Bereich der statischen Analyse Tools gibt es keine \emph{silver bullet}, welche für alle Anwendungsfälle am besten passt. Viele der in dieser Arbeit vorgestellten Werkzeuge haben eine gemeinsame Schnittmenge, unterscheiden sich jedoch etwas in Ihrer Grundlegenden Ausprägung. So ist es meist zu empfehlen, eine Mehrzahl an Werkzeugen einzusetzen, und diese vor allem für ihrer Kernfunktionalität zu benutzen.
-Ist das zu überprüfende Projekt in der Java-Welt angesiedelt kann eine Tooling-Kombination aus FindBugs für das Überprüfen auf bekannte Fehler-Pattern, PMD für das auffinden von Perfomance- und Design-Schwachstellen und Checkstyle für das Überprüfen des Einhaltens eines Code-Styleguides.
+Ist das zu überprüfende Projekt in der Java-Welt angesiedelt kann eine Tooling-Kombination aus FindBugs für das Überprüfen auf bekannte Fehler-Pattern, PMD für das auffinden von Perfomance- und Design-Schwachstellen und Checkstyle für das Überprüfen des Einhaltens eines Code-Styleguides.\\\\
 
-
-\\\\
 Folgende Vorbehalte sollten bei der Verwendung statistische Analyse Tools nicht außer Acht gelassen werden:
 \begin{enumerate}
   \item Das schlechte Image das manchen Tools anhaftet, dass sie häufig falsche Positive aufzeigen, ist teilweise berechtigt. In diesen Fällen ist es notwending, die Einstellungen der Programme auf den Anwendungsfall abzustimmen um gute Ergebnisse für die betreffende Umgebung zu erhalten. Dieser Schritt erfodert zusätzlichen Aufwand den es zu berücksichtigen gilt, welcher aber den Nutzen des Produkts drastisch verbessern kann.

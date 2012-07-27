@@ -7,10 +7,12 @@
 
 *.pdf
 
-statische_analyse.bbl
+*.bbl
 
-statische_analyse.blg
+*.blg
 
-tool-auswahl.texshop
+*.texshop
 
 .DS_Store
+
+*.out

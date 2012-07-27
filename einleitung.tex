@@ -1,18 +1,18 @@
 \section{Einleitung / \"Uberblick}
-Die statische Analyse, auch Quellcode Analyse, ist ein statisches Software-Testverfahren. Sie ist ein erster und unverzichtbarer Schritt verschiedenster Software-Qualitäts-Kontrollen. Dabei wird ein Verständnis für die Code-Struktur hergestellt und trägt dazu bei, den Code entsprechenden Standards anzupassen.
+Die statische Analyse, auch Quellcode Analyse, ist ein statisches Software-Testverfahren. Sie ist ein erster und unverzichtbarer Schritt verschiedenster Software-Qualitäts-Kontrollen. Dabei wird ein Verständnis für die Code-Struktur hergestellt. Sie trägt dazu bei, den Code an definierte Standards anzupassen.
 
-Die Analyse gestattet eine frühzeitige Erkennung und somit die Korrektur von Fehlern mit einem geringem Maß an Aufwand. Durch das frühe Eingreifen wird verhindert, dass scheinbar kleine Fehler sich manifestieren und Wochen, Monate oder Jahre später zu erheblichen Problemen führen.
+Die Analyse ermöglicht eine frühzeitige Erkennung und somit die Korrektur von Fehlern mit geringerem Aufwand. Durch das frühe Eingreifen wird verhindert, dass scheinbar kleine Fehler sich manifestieren und Wochen, Monate oder Jahre später zu erheblichen Problemen führen.
 
-Bei der statischen Analyse wird im Vergleich zu dynamischen Testverfahren, die zu testende Software nicht ausgeführt. Da der Quelltext benötigt wird, lässt sich die statische Analyse den White-Box-Testverfahren zuordnen.
+Bei der statischen Analyse wird -- im Vergleich zu dynamischen Testverfahren -- die zu testende Software nicht ausgeführt. Da der Quelltext benötigt wird, lässt sich die statische Analyse den White-Box-Testverfahren zuordnen.
 
-Die Analyse kann vollständig manuell durchgeführt werden, dies ist aber mit erheblichem Aufwand verbunden. Daher werden automatisierte Tools eingesetzt. Das erste Tool dieser Art war ``Lint'', welches seiner Zeit von den Bell Labs für die Programmiersprache C entwickelt wurde. Das heutzutage bekannteste Tool ist ``FindBugs'', auf dessen Funktionsweise und Umfang später noch näher eingegangen wird. Im Vergleich zu den frühen automatisierten Hilfen, werden heute neben funktionalen Fehlern auch sogenannter ``Code-Smell'' erkannt. Dies können beispielsweise Code-Duplizierungen oder ``toter Code'' (nicht-verwendeter Code) sein. Dabei kommen Techniken wie die \emph{Taint Analyse} oder die \emph{Datenfluss Analyse} zum Einsatz.
+Die Analyse kann vollständig manuell durchgeführt werden; dies ist aber mit erheblichem Aufwand verbunden. Daher werden automatisierte Tools eingesetzt. Das erste Tool dieser Art war ``Lint'', das in den 1970er Jahren von den Bell Labs für die Programmiersprache C entwickelt wurde. Das heutzutage bekannteste Tool ist ``FindBugs'', auf dessen Funktionsweise und Umfang wir später noch näher eingehen. Im Vergleich zu den frühen automatisierten Hilfen wird heute neben funktionalen Fehlern auch sogenannter ``Code-Smell'' erkannt. Dies können beispielsweise duplizierter oder ``toter Code'' (nicht-verwendeter Code) sein. Dabei kommen Techniken wie die \emph{Taint-Analyse} oder die \emph{Datenflussanalyse} zum Einsatz.
 
 Das Ziel der statischen Analyse ist momentan nur das Aufzeigen von möglichen Fehlern, es wird keine automatische Korrektur des Codes vorgenommen. Idealerweise würden solche Tools mit einem hohen Maß an Zuverlässigkeit mutmaßliche Fehler und Sicherheitslücken automatisch erkennen und beheben. Dies ist jedoch noch nicht realisierbar. Momentan gibt es noch immer eine hohe Rate von Fehleinschätzungen.
 
 Nichtsdestotrotz ist die statische Analyse in der heutigen Programmierung nicht mehr wegzudenken und dient als hervorragende Hilfestellung für Programmierer und Tester um vor allem sicherheitsrelevante Teile des Codes zu analysieren und Fehler effizient zu finden.
 Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumgebungen integrieren und können somit unmittelbar während der Entwicklung den Programmierer auf eventuelle Fehler hinweisen.
 
-\paragraph{Beispiele für erkennbare Fehler:}\footnote{vgl. \url{http://www.klocwork.com}, \url{http://www.hitex.com }}
+\paragraph{Beispiele für erkennbare Fehler:}\footnote{vgl. \url{http://www.klocwork.com}, \url{http://www.hitex.com}}
 \begin{itemize}
 \item Syntaktische Fehler (z.B. Tippfehler, falsche Vergleiche, Klammersetzung)
 \item Stilfehler, Einhaltung von Coding-Standards (z.B. Whitespacing)
@@ -43,7 +43,7 @@ Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumg
 \item Unerreichbarer Code
 \end{itemize}
 
-\paragraph{Stärken, Schwächen und Grenzen der statischen Analyse:}\footnote{vgl. \url{https://www.owasp.org/index.php/Static_Code_Analysis}}
+\paragraph{Stärken, Schwächen und Grenzen der statischen Analyse:}\footnote{vgl. \url{https://www.owasp.org/index.php?title=Static_Code_Analysis\&oldid=132351}}
 \subparagraph{Stärken:}
 \begin{itemize}
 \item Skaliert sehr gut
