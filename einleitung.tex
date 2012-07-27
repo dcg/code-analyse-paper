@@ -12,10 +12,11 @@ Das Ziel der statischen Analyse ist momentan nur das Aufzeigen von möglichen Fe
 Nichtsdestotrotz ist die statische Analyse in der heutigen Programmierung nicht mehr wegzudenken und dient als hervorragende Hilfestellung für Programmierer und Tester um vor allem sicherheitsrelevante Teile des Codes zu analysieren und Fehler effizient zu finden.
 Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumgebungen integrieren und können somit unmittelbar während der Entwicklung den Programmierer auf eventuelle Fehler hinweisen.
 
-\paragraph{Beispiele für erkennbare Fehler:}\footnote{vgl. \url{http://www.klocwork.com}, \url{http://www.hitex.com}}
+\paragraph{Beispiele für erkennbare Fehler:}
+Folgende Liste markanter Fehler aus den Bereichen Sicherheit, Zuverlässigkeit, sowie Code-Standards und Wartbarkeit bieten einen guten Eindruck, wie wichtig die statische Analyse bei der Entwicklung ist.\footnote{vgl. \url{http://www.klocwork.com/products/insight/klocwork-truepath/index.php}, \url{http://www.hitex.com/index.php?id=3360&L=2}}
 \begin{itemize}
-\item Syntaktische Fehler (z.B. Tippfehler, falsche Vergleiche, Klammersetzung)
-\item Stilfehler, Einhaltung von Coding-Standards (z.B. Whitespacing)
+\item Syntaktische Fehler (z.B. Tippfehler)
+\item Stilfehler, Einhaltung von Standards
 \item Software Metriken
 \item ``Bad Smells''
 \item Leere Anweisungen (z.B. Exceptions)
@@ -39,11 +40,11 @@ Die Tools selbst lassen sich in der Regel problemlos in gängige Entwicklungsumg
 \item Veraltete Methoden
 \item Gelockte und nicht-gelockte Zugriffe auf dieselbe Variable per Threads
 \item Endlosschleifen
-\item Toter Code
-\item Unerreichbarer Code
+\item Toter oder unerreichbarer Code
 \end{itemize}
 
-\paragraph{Stärken, Schwächen und Grenzen der statischen Analyse:}\footnote{vgl. \url{https://www.owasp.org/index.php?title=Static_Code_Analysis\&oldid=132351}}
+\paragraph{Stärken, Schwächen und Grenzen der statischen Analyse:}
+Im folgenden werden die Stärken und Schwächen, als auch die Problematik von falsch positiv und falsch negativ Aussagen aufgezeigt.\footnote{vgl. \url{https://www.owasp.org/index.php?title=Static_Code_Analysis\&oldid=132351}}
 \subparagraph{Stärken:}
 \begin{itemize}
 \item Skaliert sehr gut
