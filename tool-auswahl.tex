@@ -9,16 +9,26 @@ Komplexere Entwicklungsumgebungen liefern teilweise Analysetools standardmäßig
 
 Eine weitere, ebenfalls noch sehr einfache Stufe der statischen Code Analyse, stellt bei kompilierten Sprachen zunächst der Compiler dar. Dieser gibt auch ohne den Einsatz von zusätzlichen Analysewerkzeugen Hinweise auf schlechten Programmierstil oder mögliche Laufzeitprobleme. Beispielsweise weist der Java-Compiler den Programmierer auf nicht erreichbaren Code hin -- also Code der in einem Block mit nicht erfüllbarer Vorbedingung steht.
 
-\paragraph{Bekannte Tools:} Als Werkzeuge zur statischen Code Analyse sind in der Vorlesung in erster Linie \textit{FindBugs} und \textit{CheckStyle} besprochen worden, die beide im Java-Bereich eingesetzt werden. Für Java ist zudem \textit{PMD} erwähnenswert; das derzeit wohl neueste Werkzeug ist ``\textit{Development Testing}'' von coverity \citep{neumann2012}, \footnote{\url{http://www.coverity.com/development-testing/index.html}}. Es existiert eine Vielzahl weiterer Tools\footnote{\url{http://en.wikipedia.org/w/index.php?title=List_of_tools_for_static_code_analysis\&oldid=500773445}}, die für andere Sprachen, Entwicklungsumgebungen oder nur bestimmte Plattformen entwickelt sind. Dazu zählen \textit{StyleCop}, Microsoft \textit{fxCop} und Jetbrains \textit{ReSharper} für alle bzw. einige der .NET-Sprachen. Eines der ersten Werkzeuge für die statische Analyse war \textit{Lint} bzw. \textit{Splint} für die Sprache C. Hinzu kommt Software, die  Code Coverage Analysen im Zusammenspiel mit Komponententest-Frameworks erstellt; hierzu zählen u.a. \textit{Emma} für Java und Jetbrains \textit{dotCover} für die .NET-Sprachen.
+\paragraph{Bekannte Tools:} Als Werkzeuge zur statischen Code Analyse sind in der Vorlesung in erster Linie \textit{FindBugs} und \textit{CheckStyle} besprochen worden, die beide im Java-Bereich eingesetzt werden. Für Java ist zudem \textit{PMD} erwähnenswert; das derzeit wohl neueste Werkzeug ist ``\textit{Development Testing}'' von coverity \citep{neumann2012}\footnote{\url{http://www.coverity.com/development-testing/index.html}}. Es existiert eine Vielzahl weiterer Tools\footnote{\url{http://en.wikipedia.org/w/index.php?title=List_of_tools_for_static_code_analysis\&oldid=500773445}}, die für andere Sprachen, Entwicklungsumgebungen oder nur bestimmte Plattformen entwickelt sind. Dazu zählen \textit{StyleCop}, Microsoft \textit{fxCop} und Jetbrains \textit{ReSharper} für alle bzw. einige der .NET-Sprachen. Eines der ersten Werkzeuge für die statische Analyse war \textit{Lint} bzw. \textit{Splint} für die Sprache C. Hinzu kommt Software, die  Code Coverage Analysen im Zusammenspiel mit Komponententest-Frameworks erstellt; hierzu zählen u.a. \textit{Emma} für Java und Jetbrains \textit{dotCover} für die .NET-Sprachen.
 
 \paragraph{Leistungsspektrum:} Teilweise decken die Werkzeuge in ihrem Leistungsspektrum ähnliche oder gleiche Anforderungen ab wie ihre Konkurrenten. Die Mehrzahl der genannten Werkzeuge fügen sich in die Entwicklungsumgebung als Plugin ein und können in den Analysen durch Konfigurationen individualisiert werden. 
 
-Die Aufgaben von Software für die statische Analyse umfassen hauptsächlich (1) das Aufdecken von Fehlern und typischen Fehlermustern bzw. -quellen, (2) die Analyse von Anweisungen und Aufrufen von Methoden, (3) die Analyse des Datenflusses und (4) die Prüfung, ob heikler oder sicherheitskritischer Code vorhanden ist. 
+Die Aufgaben von Software für die statische Analyse umfassen hauptsächlich:
+\begin{enumerate}
+\item das Aufdecken von Fehlern und typischen Fehlermustern bzw. -quellen,
+\item die Analyse von Anweisungen und Aufrufen von Methoden,
+\item die Analyse des Datenflusses und
+\item die Prüfung, ob heikler oder sicherheitskritischer Code vorhanden ist. 
+\item Die Prüfung auf Auffälligkeiten, wie \begin{enumerate}
+\item stilistische Unzulänglichkeiten oder
+\item Möglichkeiten zur Performance-Optimierung,
+\end{enumerate} können je nach Leistungsumfang des Tools hinzukommen.
+\end{enumerate}
 
-Die Prüfung auf Auffälligkeiten, wie (a) stilistische Unzulänglichkeiten oder (b) Möglichkeiten zur Performance-Optimierung, können je nach Leistungsumfang des Tools hinzukommen.
+Eine Beschreibung der Ziele statischer Analyseverfahren findet sich sowohl in eher theoretisch \citep[S. 270]{liggesmeyer2009} als auch in praktisch orientierter Fachliteratur \citep[S. 98]{linz2010}. Die Aufgaben der Werkzeuge leiten sich daraus unmittelbar ab.
 
 Die Konfiguration der Werkzeuge lässt üblicherweise das Festlegen genereller, projektspezifischer und individueller Regeln zu, um die Priorität von Warnungen anpassbar zu machen, und um Warnungen ganz zu vermeiden die den Programmierer nicht interessieren.
 
-Je nach Tool ist es möglich, die toolgestützten Inspektionen der statischen Analyse im Rahmen eines Build-Prozesses mit z.B. Ant oder Maven einzubinden. Auch Kopplungen mit Continuous Integration Services sind, z.B. als Plugin, auf dem Markt erhältlich.
+Je nach Tool ist es möglich, die toolgestützten Inspektionen der statischen Analyse im Rahmen eines Build-Prozesses mit z.B. Ant oder Maven\footnote{} einzubinden. Auch Kopplungen mit Continuous Integration Services sind, z.B. als Plugin, auf dem Markt erhältlich.
 
 \paragraph{VCS:} Je nach Projektvorgaben ist es bei einigen der Softwaretools möglich, das Bereitstellen von Quellcode in die gemeinsam genutzte Versionsverwaltung zu verweigern, wenn der Code nicht den im Vorfeld definierten Mindestanforderungen genügt, die im Zuge der statischen Analyse vom Werkzeug geprüft werden. Die Vorlesung hat aufgezeigt, dass dieser Ansatz in der Praxis kritisch hinterfragt werden muss, um nicht das Gefühl von Überwachung oder Gängelung aufkommen zu lassen.
