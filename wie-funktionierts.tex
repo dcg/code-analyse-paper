@@ -5,7 +5,7 @@ Dieses Kapitel erläutert die interne Funktionsweise der gebräuchlichsten stati
 
 \subsection{FindBugs}
 
-FindBugs ist ein von der Universität von Maryland initiiertes Software-Projekt zur statischen Code Analyse. FindBugs ist in der Industrie weit verbreitet im Einsatz und wird von Firmen wie Google und Oracle (ehemals Sun Microsystems) unterstützt. \cite{findbugsUser}
+FindBugs ist ein von der Universität von Maryland initiiertes Software-Projekt zur statischen Code Analyse. FindBugs ist in der Industrie weit verbreitet im Einsatz und wird von Firmen wie Google und Oracle (ehemals Sun Microsystems) unterstützt \citep{findbugsUser}.
 FindBugs arbeitet vollständig auf dem Java-Bytecode und kann dadurch auch ``binäre'' Projektdistributionen analysieren. 
 
 FindBugs bietet eine große Anzahl an mitgelieferten Fehlermustern, die in verschiedene Warnstufen eingeteilt sind. Ihr Hauptfokus liegt auf der Erkennung von fehlerhaftem Code, der bei der Ausführung zu Laufzeitfehlern führen würde.
@@ -17,7 +17,7 @@ FindBugs nutzt für die Bytecode-Analyse die \textit{Apache BCEL Library}\footno
 Dies kann für Entwickler einen großen Nachteil bedeuten, da die Wenigsten ein Verständnis von Bytecode haben. Man muss beachten, dass die baumartige Struktur des Quellcodes im Bytecode -- wie auch in Maschinensprache -- zu einer flachen sequenziellen Abfolge von Instruktionen wird. 
 
 Zudem erschwert das Erstellen eines eigenen Fehlermusters dass der Bytecode sequenziell Durchlaufen wird und der Bytecode-Scanner dabei bei jeder Instruktion die ihm zugeordnenten Fehler-Detektoren über ein Visitor-Pattern aufruft. 
-Dadurch ist der Entwickler des Fehler-Detektors dafür verantwortlich, sich die bereits gescannten Instruktionen in seinem Zustand zu speichern. Hierfür bietet sich in der Regel eine Zustandsmaschine an. Auch dies ist jedoch ein Programmierparadigma, das bei vielen Entwicklern in Zeiten von objektorientierter Programmierung nicht mehr häufig genutzt wird und somit eine weitere Hürde in der Erstellung von eigenen Fehler-Mustern darstellt. \cite{findbugsDetector}
+Dadurch ist der Entwickler des Fehler-Detektors dafür verantwortlich, sich die bereits gescannten Instruktionen in seinem Zustand zu speichern. Hierfür bietet sich in der Regel eine Zustandsmaschine an. Auch dies ist jedoch ein Programmierparadigma, das bei vielen Entwicklern in Zeiten von objektorientierter Programmierung nicht mehr häufig genutzt wird und somit eine weitere Hürde in der Erstellung von eigenen Fehler-Mustern darstellt \citep{findbugsDetector}.
 
 Die Analyse des Bytecodes hat aber auch positive Seiten. So ist zum Einen die Analyse sehr performant, da sie einfach einer linearen Abarbeitung von Instruktionen entspricht. Zum Anderen ist der Bytecode bereits durch den Java Compiler optimiert worden und somit verringert sich die Häufigkeit eines \textit{False-Positive}.
 
@@ -25,18 +25,18 @@ Hinsichtlich seiner Benutzerfreundlichkeit bietet FindBugs auch Vorteile gegenü
 
 
 \subsection{PMD}
-PMD, dessen Name nach eigenen Aussagen des Projektteams keine ausgeschriebe Bedeutung hat \cite{pmdBedeutung}, ist ebenfalls ein Werkzeug zur statischen Code Analyse von Java-Quellcode. 
+PMD, dessen Name nach eigenen Aussagen des Projektteams keine ausgeschriebe Bedeutung hat \citep{pmdBedeutung}, ist ebenfalls ein Werkzeug zur statischen Code Analyse von Java-Quellcode. 
 
 Auch PMD liefert eine Vielzahl an eingebauten Regeln, die anders als bei FindBugs nicht so sehr auf potentielle Fehler, sondern eher auf ineffizienten Code ausgelegt sind. Beispiele hierfür sind z.B. leere Blöcke, toter Code oder die falsche Verwendung von \verb=String= und \verb=StringBuffer=. 
 
-PMD besitzt weiter einen Copy/Paste-Detektor, der es erlaubt, mithilfe des Rabin-Karp-Algorithmus' duplizierten Code zu finden. \cite{pmdRabin}
+PMD besitzt weiter einen Copy/Paste-Detektor, der es erlaubt, mithilfe des Rabin-Karp-Algorithmus' duplizierten Code zu finden \citep{pmdRabin}.
 
 PMD arbeitet, anders als FindBugs, nicht auf den binären Java Class-Dateien, sondern auf dem Quellcode. Genauer gesagt analysiert PMD auf der Ebene des \textit{Abstract Syntax Tree} (AST), der aus dem Quellcode vor dem Erstellen des Bytecode erzeugt wird. 
 
 Die Analyse des ASTs ist zwar nicht so performant wie das einfache Scannen von Bytecode, besitzt für das Entwicklen von eigenen Regeln aufgrund der Nähe zum Quellcode aber entsprechende Vorteile.
 
 Bei der Transformation des Quelltextes zu einem Abstract Syntax Tree gehen im Gegensatz zu Bytecode keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
-Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu traversieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, das den erzeugten AST darstellt, und in dem man explorativ diese Baumstruktur traversieren kann. \cite{pmdAST}
+Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu traversieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, das den erzeugten AST darstellt, und in dem man explorativ diese Baumstruktur traversieren kann \citep{pmdAST}.
 
 Die Analyse auf einem AST bietet einen weiteren Vorteil: Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine Vielzahl von Werkzeugen die auf ihnen operieren können. Das in diesem Kontext wichtigste Werkzeug ist \textit{XPath}.
 
