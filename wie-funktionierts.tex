@@ -1,12 +1,12 @@
 \begin{flushleft}
 \section{Funktionsweise der Werkzeuge}
 \end{flushleft}
-Dieses Kapitel erläutert die interne Funktionsweise der gebräuchlichsten statischen Code Analyse Tools für Java. Diese sind wie in vorherigen Kapiteln dargestellt: Findbugs, Checkstyle, PMD sowie Emma, welches den Code zwar nicht statisch analysiert, im Rahmen der Vorlesung aber trotzdem im Kontext der statischen Analyse besprochen wurde.
+Dieses Kapitel erläutert die interne Funktionsweise der gebräuchlichsten statischen Code-Analyse Tools für Java. Diese sind wie in vorherigen Kapiteln dargestellt: Findbugs, Checkstyle, PMD sowie Emma, welches den Code zwar nicht statisch analysiert, im Rahmen der Vorlesung aber trotzdem im Kontext der statischen Analyse besprochen wurde.
 
 
 \subsection{FindBugs}
 
-FindBugs ist ein von der Universität von Maryland initiiertes Software-Projekt zur statischen Code Analyse. FindBugs ist in der Industrie weit verbreitet im Einsatz und wird von Firmen wie Google und Oracle (ehemals Sun Microsystems) unterstützt \citep{findbugsUser}.
+FindBugs ist ein von der Universität von Maryland initiiertes Software-Projekt zur statischen Code-Analyse. FindBugs ist in der Industrie weit verbreitet im Einsatz und wird von Firmen wie Google und Oracle (ehemals Sun Microsystems) unterstützt \citep{findbugsUser}.
 FindBugs arbeitet vollständig auf dem Java-Bytecode und kann dadurch auch ``binäre'' Projektdistributionen analysieren. 
 
 FindBugs bietet eine große Anzahl an mitgelieferten Fehlermustern, die in verschiedene Warnstufen eingeteilt sind. Ihr Hauptfokus liegt auf der Erkennung von fehlerhaftem Code, der bei der Ausführung zu Laufzeitfehlern führen würde.
@@ -17,7 +17,7 @@ FindBugs nutzt für die Bytecode-Analyse die \textit{Apache BCEL Library}\footno
 
 Dies kann für Entwickler einen großen Nachteil bedeuten, da die Wenigsten ein Verständnis von Bytecode haben. Man muss beachten, dass die baumartige Struktur des Quellcodes im Bytecode -- wie auch in Maschinensprache -- zu einer flachen sequenziellen Abfolge von Instruktionen wird. 
 
-Zudem erschwert das Erstellen eines eigenen Fehlermusters dass der Bytecode sequenziell Durchlaufen wird und der Bytecode-Scanner dabei bei jeder Instruktion die ihm zugeordnenten Fehler-Detektoren über ein Visitor-Pattern aufruft. 
+Zudem erschwert das Erstellen eines eigenen Fehlermusters dass der Bytecode sequenziell durchlaufen wird und der Bytecode-Scanner im Zuge dessen bei jeder Instruktion die ihm zugeordnenten Fehler-Detektoren über ein Visitor-Pattern aufruft. 
 Dadurch ist der Entwickler des Fehler-Detektors dafür verantwortlich, sich die bereits gescannten Instruktionen in seinem Zustand zu speichern. Hierfür bietet sich in der Regel eine Zustandsmaschine an. Auch dies ist jedoch ein Programmierparadigma, das bei vielen Entwicklern in Zeiten von objektorientierter Programmierung nicht mehr häufig genutzt wird und somit eine weitere Hürde in der Erstellung von eigenen Fehler-Mustern darstellt \citep{findbugsDetector}.
 
 Die Analyse des Bytecodes hat aber auch positive Seiten. So ist zum Einen die Analyse sehr performant, da sie einfach einer linearen Abarbeitung von Instruktionen entspricht. Zum Anderen ist der Bytecode bereits durch den Java Compiler optimiert worden und somit verringert sich die Häufigkeit eines \textit{False-Positive}.
@@ -26,7 +26,7 @@ Hinsichtlich seiner Benutzerfreundlichkeit bietet FindBugs auch Vorteile gegenü
 
 
 \subsection{PMD}
-PMD, dessen Name nach eigenen Aussagen des Projektteams keine ausgeschriebe Bedeutung hat \citep{pmdBedeutung}, ist ebenfalls ein Werkzeug zur statischen Code Analyse von Java-Quellcode. 
+PMD, dessen Name nach eigenen Aussagen des Projektteams keine ausgeschriebe Bedeutung hat \citep{pmdBedeutung}, ist ebenfalls ein Werkzeug zur statischen Code-Analyse von Java-Quellcode. 
 
 Auch PMD liefert eine Vielzahl an eingebauten Regeln, die anders als bei FindBugs nicht so sehr auf potentielle Fehler, sondern eher auf ineffizienten Code ausgelegt sind. Beispiele hierfür sind z.B. leere Blöcke, toter Code oder die falsche Verwendung von \verb=String= und \verb=StringBuffer=. 
 
@@ -41,9 +41,9 @@ Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu t
 
 Die Analyse auf einem AST bietet einen weiteren Vorteil: Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine Vielzahl von Werkzeugen die auf ihnen operieren können. Das in diesem Kontext wichtigste Werkzeug ist \textit{XPath}.
 
-PMD bietet neben der Schnitstelle für in Java implementierte Regeln auch eine Schnittstelle für XPath an.
+PMD bietet neben der Schnittstelle für in Java implementierte Regeln auch eine Schnittstelle für XPath-Ausdrücke an.
 
-XPath oder auch \textit{XML Path Language} ist eine vom W3-Konsortium entwickelte Abfragesprache, um Teile eines XML-Dokumentes abzufragen, welche ebenfalls Bäume sind. Dabei bietet es eine sehr einfache Möglichkeit, Bäume zu travasieren. Das folgende Beispiel würde z.B. alle Bücher aus einem Baum liefern, das maximal 100, jedoch mindestens 10 Kindelemente/Seiten hat:
+XPath oder auch \textit{XML Path Language} ist eine vom W3-Konsortium entwickelte Abfragesprache, um Teile eines XML-Dokumentes abzufragen, welche ebenfalls Bäume sind. Dabei bietet es eine sehr einfache Möglichkeit, Bäume zu traversieren. Das folgende Beispiel würde z.B. alle Bücher aus einem Baum liefern, das maximal 100, jedoch mindestens 10 Kindelemente/Seiten hat:
 
 
 \begin{lstlisting}
@@ -58,8 +58,8 @@ PMD bietet ebenfalls ein Konsolen-Tool, das sich sehr gut in Build-Prozesse inte
 
 \subsection{Checkstyle}
 
-Checkstyle ist das dritte wichtige Werkzeug zur statischen Code Analyse in der Java-Welt. Der Fokus von Checkstyle liegt weder in der effizienten Nutzung der JVM noch in dem Auffinden von Programmierfehlern, sondern vor allem in der Prüfung des Quellcodes auf die Einhaltung eines einheitlichen Programmierstils. 
-Dafür liefert Checkstyle viele Regeln von Haus aus mit, die in Modulen gruppiert sind. Einige Beispiele an mitgliefierten Modulen sind:
+Checkstyle ist das dritte wichtige Werkzeug zur statischen Code-Analyse in der Java-Welt. Der Fokus von Checkstyle liegt weder in der effizienten Nutzung der JVM noch in dem Auffinden von Programmierfehlern, sondern vor allem in der Prüfung des Quellcodes auf die Einhaltung eines einheitlichen Programmierstils. 
+Dafür liefert Checkstyle viele Regeln von Haus aus mit, die in Modulen gruppiert sind. Einige Beispiele an mitgelieferten Modulen sind:
 \begin{itemize}
 \item \textit{Class Design}, welches Prüfungen zum Softwaredesign beinhaltet
 \item \textit{Coding}, das allgemeine Coding Guidelines prüft
@@ -75,10 +75,10 @@ Checkstyle lässt sich wie PMD und FindBugs sehr einfach über ein Konsolen-Werk
 
 \subsection{Emma}
 
-Emma ist eine Code Coverage Bibliothek von Vlad Roubtsov. Sie zählt eigentlich nicht zu den statischen Code Analyse Tools. Emma soll aber, da diese Bibliothek während der Vorlesung im Kontext solcher behandelt wurde, hier kurz erläutert und zur statischen Code Analyse abgegrenzt werden. 
+Emma ist eine Code Coverage Bibliothek von Vlad Roubtsov. Sie zählt eigentlich nicht zu den Werkzeugen für statische Code-Analyse. Emma soll aber, da diese Bibliothek während der Vorlesung im Kontext solcher behandelt wurde, hier kurz erläutert und zur statischen Code-Analyse abgegrenzt werden. 
 Das Ziel von Emma ist zu analysieren, welcher Code durchlaufen wird. Diese Information ist zum Beispiel für die Ermittlung einer Testabdeckung sehr interessant. Emma unterstützt dabei eine Vielzahl von Metriken, die aber in den entsprechenden Ausarbeitungen zum Thema Testabdeckung zu finden sind. In diesem Kontext soll nun auf die Funktionsweise von Emma eingegangen werden.
 
-Wie bereits erwähnt ist Emma kein Werkzeug der statischen Code-Analyse. Die Funktionsweise von Emma basiert auf der Instrumentierung von Java Bytecode. Dazu unterstützt Emma zwei Verfahren: \begin{enumerate}
+Die Funktionsweise von Emma basiert auf der Instrumentierung von Java Bytecode. Dazu unterstützt Emma zwei Verfahren: \begin{enumerate}
 \item So kann in einem zweiten ``\verb=compile=''-Schritt der Bytecode um entsprechende Hooks erweitert werden, die dem Emma Toolkit die nötigen Daten über den durchlaufenden Code geben.
 \item Zum Anderen kann die Applikation mit einem speziellen Emma-Classloader gestartet werden, der den geladenen Bytecode on-the-fly instrumentiert. 
 \end{enumerate}
