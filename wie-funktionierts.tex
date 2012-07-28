@@ -37,7 +37,7 @@ PMD arbeitet, anders als FindBugs, nicht auf den binären Java Class-Dateien, so
 Die Analyse des ASTs ist zwar nicht so performant wie das einfache Scannen von Bytecode, besitzt für das Entwicklen von eigenen Regeln aufgrund der Nähe zum Quellcode aber entsprechende Vorteile.
 
 Bei der Transformation des Quelltextes zu einem Abstract Syntax Tree gehen im Gegensatz zu Bytecode keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
-Möchte man nun seine eigenen PMD Regeln hinzufügen, reicht es aus den AST zu traversieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, das den erzeugten AST darstellt, und in dem man explorativ diese Baumstruktur traversieren kann \citep{pmdAST}.
+Möchte man nun seine eigenen PMD-Regeln hinzufügen, reicht es aus den AST zu traversieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, das den erzeugten AST darstellt, und in dem man explorativ diese Baumstruktur traversieren kann \citep{pmdAST}. Die grafische Oberfläche dieses Werkzeugs ist in Abbildung \ref{fig:pmd} dargestellt.
 
 Die Analyse auf einem AST bietet einen weiteren Vorteil: Da Bäume eine weit verbreitete Darstellungsform sind, gibt es bereits eine Vielzahl von Werkzeugen die auf ihnen operieren können. Das in diesem Kontext wichtigste Werkzeug ist \textit{XPath}.
 
