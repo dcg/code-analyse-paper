@@ -1,9 +1,9 @@
 \section{Bewertung}
-Viele der vorgestellten Tools lassen sich einfach in gängige Entwicklungsumgebungen einbinden und brauchen nur wenig Einarbeitungszeit. Gleichzeitig liefern sie einen hohen Nutzen für die Entwickler. 
-Durch die Integration in die Entwicklungsumgebung kann der Quellcode direkt analysiert werden und Entwickler halten direkte Rückmeldung über ihre Entwicklung. Desweiteren lassen sich viele Überprüfungen der Tools automatisieren, dies kann wahlweise in einem Continious Integration Server (z.B. Jenkins) oder direkt beim einchecken in das Repository geschehen (z.B. Git-Hooks\footnote{\url{http://git-scm.com/book/en/Customizing-Git-Git-Hooks}}). Dies führt insgesamt zu einer saubereren, fehlerfreieren und verständlicheren Codebasis.
+Viele der vorgestellten Tools lassen sich einfach in gängige Entwicklungsumgebungen einbinden und erfordern nur wenig Einarbeitungszeit. Gleichzeitig liefern sie einen hohen Nutzen für die Entwickler. 
+Durch die Integration in die Entwicklungsumgebung kann der Quellcode direkt analysiert werden und Entwickler halten direkte Rückmeldung über ihre Entwicklung. Desweiteren lassen sich viele Überprüfungen der Tools automatisieren. Dies kann wahlweise in einem Continious Integration Server (z.B. Jenkins) oder direkt beim Einchecken in das Repository geschehen (z.B. Git-Hooks\footnote{\url{http://git-scm.com/book/en/Customizing-Git-Git-Hooks}}). Das führt insgesamt zu einer saubereren und verständlicheren Codebasis mit weniger Fehlern.
 
-Bei der großen Anzahl verschiedener Tools ist es schwierig Empfehlungen für einzelne Produkte auszusprechen. Denn auch im Bereich der statischen Analyse Tools gibt es keine \emph{silver bullet}, welche für alle Anwendungsfälle am besten passt. Viele der in dieser Arbeit vorgestellten Werkzeuge haben eine gemeinsame Schnittmenge, unterscheiden sich jedoch etwas in Ihrer Grundlegenden Ausprägung. So ist es meist zu empfehlen, eine Mehrzahl an Werkzeugen einzusetzen, und diese vor allem für ihrer Kernfunktionalität zu benutzen.
-Ist das zu überprüfende Projekt in der Java-Welt angesiedelt kann eine Tooling-Kombination aus FindBugs für das Überprüfen auf bekannte Fehler-Pattern, PMD für das Auffinden von Perfomance- und Design-Schwachstellen und Checkstyle für das Überprüfen der Einhaltung eines Code-Styleguides.\\\\
+Bei der großen Anzahl verschiedener Tools ist es schwierig Empfehlungen für einzelne Produkte auszusprechen. Denn auch im Bereich der statischen Analyse Tools gibt es keine \emph{silver bullet}, welche für alle Anwendungsfälle am Besten passt. Viele der in dieser Arbeit vorgestellten Werkzeuge haben eine gemeinsame Schnittmenge, unterscheiden sich jedoch etwas in Ihrer grundlegenden Ausprägung. So ist es meist zu empfehlen, eine Mehrzahl an Werkzeugen einzusetzen, und diese vor allem entsprechend ihrer Kernfunktionalität zu benutzen.
+Ist das zu überprüfende Projekt in der Java-Welt angesiedelt, so kann eine Tooling-Kombination sinnvoll sein, die sich zusammensetzt aus FindBugs für das Überprüfen auf bekannte Fehlermuster, PMD für das Auffinden von Perfomance- und Design-Schwachstellen und Checkstyle für das Überprüfen der Einhaltung eines Code-Styleguides.\\
 
 Folgende Vorbehalte sollten bei der Verwendung statistische Analyse Tools nicht außer Acht gelassen werden:
 \begin{enumerate}
@@ -11,6 +11,6 @@ Folgende Vorbehalte sollten bei der Verwendung statistische Analyse Tools nicht 
   \item Werden statische Analyse Tools für sicherheitsrelevante Überprüfungen eingesetzt ist zu beachten, dass diese Tools der Unterstützung dienen, keinesfalls aber eine vollständige Testabdeckung gewährleisten.
 \end{enumerate}
 
-Unter Berücksichtigung der Vorbehalte sind statische Analyse Tools ein nützlicher und empfehlenswerter Arbeitsschritt bei jeder  Art der Software Entwicklung. Nicht zuletzt lassen sich mit Hilfe der Tools die Kosten für die Beseitigung von Fehlern in der Software reduzieren. Je früher ein Fehler entdeckt wird, desto geringer ist der Preis ihn zu reparieren\footnote{vgl. ``Code Complete'' \citep{mcconnell2004}}.
+Unter Berücksichtigung der Vorbehalte etablieren statische Analysetools einen nützlichen und empfehlenswerten Arbeitsschritt bei jeder Art der Softwareentwicklung. Nicht zuletzt lassen sich mit Hilfe der Tools die Kosten für die Beseitigung von Fehlern in der Software reduzieren. Je früher ein Fehler entdeckt wird, desto geringer ist der Preis ihn zu reparieren\footnote{vgl. ``Code Complete'' \citep{mcconnell2004}}.
 
-\begin{flushleft}
+\begin{flushleft} % fuer die bibliography

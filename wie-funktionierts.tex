@@ -1,7 +1,7 @@
 \begin{flushleft}
 \section{Funktionsweise der Werkzeuge}
 \end{flushleft}
-Dieses Kapitel erläutert die interne Funktionsweise der gebräuchlichsten statischen Code-Analyse Tools für Java. Diese sind wie in vorherigen Kapiteln dargestellt: Findbugs, Checkstyle, PMD sowie Emma, welches den Code zwar nicht statisch analysiert, im Rahmen der Vorlesung aber trotzdem im Kontext der statischen Analyse besprochen wurde.
+Dieses Kapitel erläutert die interne Funktionsweise der gebräuchlichsten statischen Code-Analyse Tools für Java. Diese sind wie in vorherigen Kapiteln dargestellt: Findbugs, Checkstyle, PMD sowie Emma, welches den Code zwar nicht statisch analysiert, im Rahmen der Vorlesung aber trotzdem im Kontext der statischen Analyse besprochen wurde.\\
 
 
 \subsection{FindBugs}
@@ -78,13 +78,15 @@ Checkstyle lässt sich wie PMD und FindBugs sehr einfach über ein Konsolen-Werk
 Emma ist eine Code Coverage Bibliothek von Vlad Roubtsov. Sie zählt eigentlich nicht zu den Werkzeugen für statische Code-Analyse. Emma soll aber, da diese Bibliothek während der Vorlesung im Kontext solcher behandelt wurde, hier kurz erläutert und zur statischen Code-Analyse abgegrenzt werden. 
 Das Ziel von Emma ist zu analysieren, welcher Code durchlaufen wird. Diese Information ist zum Beispiel für die Ermittlung einer Testabdeckung sehr interessant. Emma unterstützt dabei eine Vielzahl von Metriken, die aber in den entsprechenden Ausarbeitungen zum Thema Testabdeckung zu finden sind. In diesem Kontext soll nun auf die Funktionsweise von Emma eingegangen werden.
 
-Die Funktionsweise von Emma basiert auf der Instrumentierung von Java Bytecode. Dazu unterstützt Emma zwei Verfahren: \begin{enumerate}
+Die Funktionsweise von Emma basiert auf der Instrumentierung\footnote{zum Begriff der Instrumentierung siehe \url{https://de.wikipedia.org/w/index.php?title=Instrumentierung_\%28Softwareentwicklung\%29\&oldid=75064379}} von Java Bytecode. Dazu unterstützt Emma zwei Verfahren: \begin{enumerate}
 \item So kann in einem zweiten ``\verb=compile=''-Schritt der Bytecode um entsprechende Hooks erweitert werden, die dem Emma Toolkit die nötigen Daten über den durchlaufenden Code geben.
 \item Zum Anderen kann die Applikation mit einem speziellen Emma-Classloader gestartet werden, der den geladenen Bytecode on-the-fly instrumentiert. 
 \end{enumerate}
-Als nächstes wird ein Driver benötigt, der den instrumentierten Code durchläuft. Dies kann entweder durch manuelles Bedienen der Applikation geschehen, oder auch durch automatische Tests. Der am Weitesten verbreitete Anwendungsfall ist wohl die bereits erwähnte Testabdeckung bei Komponententests. Als reines Code Coverage Tool ist Emma jedoch wesentlich vielseitiger einsetzbar. So kann ein weiterer interessanter Ansatz sein, dass man sich in geerbtem `Spagetthi-Code' einen schnellen Überblick verschaffen will, welcher Code bei einer Benutzeraktion überhaupt durchlaufen wird.
+Als Nächstes wird ein Driver benötigt, der den instrumentierten Code durchläuft. Dies kann entweder durch manuelles Bedienen der Applikation geschehen, oder auch durch automatische Tests.\\
 
-Emma lässt sich über Ant und Maven Plugins gut in den Build-Prozess inegrieren und bietet gerade für den Fall der Testabdeckung mit \textit{EclEmma} ein sehr gutes Eclipse-Plugin.
+Der am Weitesten verbreitete Anwendungsfall ist wohl die bereits erwähnte Testabdeckung bei Komponententests. Als reines Code Coverage Tool ist Emma jedoch wesentlich vielseitiger einsetzbar. So kann ein weiterer interessanter Ansatz sein, dass man sich in geerbtem `Spagetthi-Code' einen schnellen Überblick verschaffen will, welcher Code bei einer Benutzeraktion überhaupt durchlaufen wird.\\
+
+Emma lässt sich über Ant und Maven Plugins gut in den Build-Prozess integrieren und bietet gerade für den Fall der Testabdeckung mit \textit{EclEmma} ein sehr gutes Eclipse-Plugin.
 
 % für alle sections: Quellen fehlen noch
 
