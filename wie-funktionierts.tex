@@ -17,16 +17,16 @@ FindBugs nutzt für die Bytecode-Analyse die \textit{Apache BCEL Library}\footno
 
 Dies kann für Entwickler einen großen Nachteil bedeuten, da die Wenigsten ein Verständnis von Bytecode haben. Man muss beachten, dass die baumartige Struktur des Quellcodes im Bytecode -- wie auch in Maschinensprache -- zu einer flachen sequenziellen Abfolge von Instruktionen wird. 
 
-Zudem erschwert das Erstellen eines eigenen Fehlermusters dass der Bytecode sequenziell durchlaufen wird und der Bytecode-Scanner im Zuge dessen bei jeder Instruktion die ihm zugeordnenten Fehler-Detektoren über ein Visitor-Pattern aufruft. 
+Zudem erschwert das Erstellen eines eigenen Fehlermusters dass der Bytecode sequenziell durchlaufen wird und der Bytecode-Scanner im Zuge dessen bei jeder Instruktion die ihm zugeordneten Fehler-Detektoren über ein Visitor-Pattern aufruft. 
 Dadurch ist der Entwickler des Fehler-Detektors dafür verantwortlich, sich die bereits gescannten Instruktionen in seinem Zustand zu speichern. Hierfür bietet sich in der Regel eine Zustandsmaschine an. Auch dies ist jedoch ein Programmierparadigma, das bei vielen Entwicklern in Zeiten von objektorientierter Programmierung nicht mehr häufig genutzt wird und somit eine weitere Hürde in der Erstellung von eigenen Fehler-Mustern darstellt \citep{findbugsDetector}.
 
-Die Analyse des Bytecodes hat aber auch positive Seiten. So ist zum Einen die Analyse sehr performant, da sie einfach einer linearen Abarbeitung von Instruktionen entspricht. Zum Anderen ist der Bytecode bereits durch den Java Compiler optimiert worden und somit verringert sich die Häufigkeit eines \textit{False-Positive}.
+Die Analyse des Bytecodes hat aber auch positive Seiten. So ist zum einen die Analyse sehr performant, da sie einfach einer linearen Abarbeitung von Instruktionen entspricht. Zum anderen ist der Bytecode bereits durch den Java Compiler optimiert worden und somit verringert sich die Häufigkeit eines \textit{False-Positive}.
 
-Hinsichtlich seiner Benutzerfreundlichkeit bietet FindBugs auch Vorteile gegenüber anderen Werkzeugen. So bietet es zum Einen eine sehr gute und aktuelle Integration in Eclipse und viele andere Entwicklungsumgebungen und lässt sich zum Anderen über ein Konsolen-Tool einfach in automatische Build-Prozesse einbinden.
+Hinsichtlich seiner Benutzerfreundlichkeit bietet FindBugs auch Vorteile gegenüber anderen Werkzeugen. So bietet es zum einen eine sehr gute und aktuelle Integration in Eclipse und viele andere Entwicklungsumgebungen und lässt sich zum anderen über ein Konsolen-Tool einfach in automatische Build-Prozesse einbinden.
 
 
 \subsection{PMD}
-PMD, dessen Name nach eigenen Aussagen des Projektteams keine ausgeschriebe Bedeutung hat \citep{pmdBedeutung}, ist ebenfalls ein Werkzeug zur statischen Code-Analyse von Java-Quellcode. 
+PMD, dessen Name nach eigenen Aussagen des Projektteams keine ausgeschriebene Bedeutung hat \citep{pmdBedeutung}, ist ebenfalls ein Werkzeug zur statischen Code-Analyse von Java-Quellcode. 
 
 Auch PMD liefert eine Vielzahl an eingebauten Regeln, die anders als bei FindBugs nicht so sehr auf potentielle Fehler, sondern eher auf ineffizienten Code ausgelegt sind. Beispiele hierfür sind z.B. leere Blöcke, toter Code oder die falsche Verwendung von \verb=String= und \verb=StringBuffer=. 
 
@@ -34,7 +34,7 @@ PMD besitzt weiter einen Copy/Paste-Detektor, der es erlaubt, mithilfe des Rabin
 
 PMD arbeitet, anders als FindBugs, nicht auf den binären Java Class-Dateien, sondern auf dem Quellcode. Genauer gesagt analysiert PMD auf der Ebene des \textit{Abstract Syntax Tree} (AST), der aus dem Quellcode vor dem Erstellen des Bytecode erzeugt wird. 
 
-Die Analyse des ASTs ist zwar nicht so performant wie das einfache Scannen von Bytecode, besitzt für das Entwicklen von eigenen Regeln aufgrund der Nähe zum Quellcode aber entsprechende Vorteile.
+Die Analyse des ASTs ist zwar nicht so performant wie das einfache Scannen von Bytecode, besitzt für das Entwickeln von eigenen Regeln aufgrund der Nähe zum Quellcode aber entsprechende Vorteile.
 
 Bei der Transformation des Quelltextes zu einem Abstract Syntax Tree gehen im Gegensatz zu Bytecode keine Informationen über die Struktur des Quelltextes verloren. Es wird einzig der vorhandene Quelltext in einem Baum abgebildet. 
 Möchte man nun seine eigenen PMD-Regeln hinzufügen, reicht es aus den AST zu traversieren und auf das Vorkommen des entsprechenden Musters zu untersuchen. PMD bietet für diese Aufgabe ein eigenes Entwicklungstool an, das den erzeugten AST darstellt, und in dem man explorativ diese Baumstruktur traversieren kann \citep{pmdAST}. Die grafische Oberfläche dieses Werkzeugs ist in Abbildung \ref{fig:pmd} (S. \pageref{fig:pmd}) dargestellt.
@@ -53,7 +53,7 @@ XPath oder auch \textit{XML Path Language} ist eine vom W3-Konsortium entwickelt
 
 Diese XPath-Ausdrücke können direkt in den PMD-Konfigurations-Dateien angegeben werden und machen es so für einfache und mittelmäßig komplexe Regeln überflüssig, eigene Java-Module zu implementieren.
 
-PMD bietet ebenfalls ein Konsolen-Tool, das sich sehr gut in Build-Prozesse integrieren lässt. Das entsprechende Eclipse Plugin ist zum aktuellen Zeitpunkt (Juli 2012) leider nicht auf dem aktuellsten Stand: Es arbeitet noch mit PMD Version 4, welche zur Version 5 inkompatibele Konfigurations-Dateien nutzt. Soll also die aktuellste PMD Version 5 im Build-Prozess verwendet werden, müssen zwei Konfigurations-Dateien für Version 4 und 5 gepflegt werden.
+PMD bietet ebenfalls ein Konsolen-Tool, das sich sehr gut in Build-Prozesse integrieren lässt. Das entsprechende Eclipse Plugin ist zum aktuellen Zeitpunkt (Juli 2012) leider nicht auf dem aktuellsten Stand: Es arbeitet noch mit PMD Version 4, welche zur Version 5 inkompatible Konfigurations-Dateien nutzt. Soll also die aktuellste PMD Version 5 im Build-Prozess verwendet werden, müssen zwei Konfigurations-Dateien für Version 4 und 5 gepflegt werden.
 
 
 \subsection{Checkstyle}
@@ -68,7 +68,7 @@ Dafür liefert Checkstyle viele Regeln von Haus aus mit, die in Modulen gruppier
 \item \textit{Naming Conventions}, um die Einhaltung von Namenskonventionen zu prüfen
 \item \textit{Whitespaces} zur Prüfung des Quelltextes hinsichtlich Leerzeichen und korrekter Einrückung
 \end{itemize}
-Checksyle arbeitet ähnlich wie PMD auf dem AST und kann durch eigene Java-Module erweitert werden, die ebenfalls auf dem AST arbeiten. Checkstyle bietet zur Erweierung noch eine weitere sehr nützliche Schnitstelle. So bietet das Modul ``Regexp'' es dem Entwickler an, eigene Regeln mithilfe von regulären Ausdrücken zu schreiben. Dies dürfte gerade beim Überprüfen von Coding Guildelines oft als ausreichend empfunden werden und bietet eine sehr einfache Schnittstelle, um Checkstyle zu erweitern.
+Checkstyle arbeitet ähnlich wie PMD auf dem AST und kann durch eigene Java-Module erweitert werden, die ebenfalls auf dem AST arbeiten. Checkstyle bietet zur Erweiterung noch eine weitere sehr nützliche Schnittstelle. So bietet das Modul ``Regexp'' es dem Entwickler an, eigene Regeln mithilfe von regulären Ausdrücken zu schreiben. Dies dürfte gerade beim Überprüfen von Coding Guidelines oft als ausreichend empfunden werden und bietet eine sehr einfache Schnittstelle, um Checkstyle zu erweitern.
 
 Checkstyle lässt sich wie PMD und FindBugs sehr einfach über ein Konsolen-Werkzeug in den Build-Prozess einbinden und bietet ein gut funktionierendes Eclipse-Plugin.
 
@@ -80,13 +80,13 @@ Das Ziel von Emma ist zu analysieren, welcher Code durchlaufen wird. Diese Infor
 
 Die Funktionsweise von Emma basiert auf der Instrumentierung\footnote{zum Begriff der Instrumentierung siehe \url{https://de.wikipedia.org/w/index.php?title=Instrumentierung_\%28Softwareentwicklung\%29\&oldid=75064379}} von Java Bytecode. Dazu unterstützt Emma zwei Verfahren: \begin{enumerate}
 \item So kann in einem zweiten ``\verb=compile=''-Schritt der Bytecode um entsprechende Hooks erweitert werden, die dem Emma Toolkit die nötigen Daten über den durchlaufenden Code geben.
-\item Zum Anderen kann die Applikation mit einem speziellen Emma-Classloader gestartet werden, der den geladenen Bytecode on-the-fly instrumentiert. 
+\item Zum anderen kann die Applikation mit einem speziellen Emma-Classloader gestartet werden, der den geladenen Bytecode on-the-fly instrumentiert. 
 \end{enumerate}
 Als Nächstes wird ein Driver benötigt, der den instrumentierten Code durchläuft. Dies kann entweder durch manuelles Bedienen der Applikation geschehen, oder auch durch automatische Tests.\\
 
 Der am Weitesten verbreitete Anwendungsfall ist wohl die bereits erwähnte Testabdeckung bei Komponententests. Als reines Code Coverage Tool ist Emma jedoch wesentlich vielseitiger einsetzbar. So kann ein weiterer interessanter Ansatz sein, dass man sich in geerbtem `Spagetthi-Code' einen schnellen Überblick verschaffen will, welcher Code bei einer Benutzeraktion überhaupt durchlaufen wird.\\
 
-Emma lässt sich über Ant und Maven Plugins gut in den Build-Prozess integrieren und bietet gerade für den Fall der Testabdeckung mit \textit{EclEmma} ein sehr gutes Eclipse-Plugin.
+Emma lässt sich über Ant und Maven Plugins gut in den Build-Prozess inegrieren und bietet gerade für den Fall der Testabdeckung mit \textit{Eclemma} ein sehr gutes Eclipse-Plugin.
 
 % für alle sections: Quellen fehlen noch
 
